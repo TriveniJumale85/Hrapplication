@@ -1,0 +1,72 @@
+<table class="table table-bordered table-striped mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>Leave ID</th>
+      <th>Employee Name</th>
+      <th>From Date</th>
+      <th>To Date</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th>Remarks</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let leave of leaveRequests">
+      <td>{{ leave.leaveId }}</td>
+      <td>{{ leave.employeeName }}</td>
+      <td>{{ leave.fromDate | date: 'dd-MM-yyyy' }}</td>
+      <td>{{ leave.toDate | date: 'dd-MM-yyyy' }}</td>
+      <td>{{ leave.reason }}</td>
+
+      <!-- Leave Status -->
+      <td>
+        <span class="badge"
+          [ngClass]="{
+            'bg-warning': leave.status === 'PENDING',
+            'bg-success': leave.status === 'APPROVED',
+            'bg-danger': leave.status === 'REJECTED',
+            'bg-secondary': leave.status === 'CANCELLED'
+          }">
+          {{ leave.status }}
+        </span>
+      </td>
+
+      <!-- Remarks Section -->
+      <td>
+        <!-- Old Remarks -->
+        <div *ngIf="leave.remarks?.length; else noRemark">
+          <ul class="list-unstyled mb-1">
+            <li *ngFor="let remark of leave.remarks">
+              <small>📝 {{ remark }}</small>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noRemark>
+          <small class="text-muted fst-italic">No remarks yet</small>
+        </ng-template>
+
+        <!-- Add Remark -->
+        <div *ngIf="leave.status !== 'CANCELLED'" class="input-group input-group-sm mt-2">
+          <input type="text"
+                 [(ngModel)]="leave.newRemark"
+                 placeholder="Add remark"
+                 class="form-control" />
+          <button class="btn btn-primary" (click)="saveRemark(leave)">Save</button>
+        </div>
+      </td>
+
+      <!-- Status Update Dropdown -->
+      <td>
+        <select
+          class="form-select form-select-sm"
+          [value]="leave.status || 'PENDING'"
+          (change)="onStatusChange($event, leave.leaveId)"
+          [disabled]="leave.status === 'CANCELLED'">
+          <option value="" disabled>Update status</option>
+          <option *ngFor="let status of leaveStatuses" [value]="status">{{ status }}</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,9 @@
+.table td, .table th {
+  vertical-align: middle; /* Center align text */
+}
+
+.table td {
+  white-space: normal !important; 
+  word-wrap: break-word; 
+  max-width: 300px; 
+}

@@ -1,0 +1,80 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card">
+        <div class="card-header bg-gradient bg-primary text-white rounded-top-4 py-3">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-cash-stack me-2"></i> Upload Employee Salary
+          </h5>
+        </div>
+
+        <div class="card-body bg-white rounded-bottom-4">
+          <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" novalidate>
+
+
+<div class="mb-3">
+  <label for="userEmail" class="form-label">User Email</label>
+  <input
+    type="email"
+    id="userEmail"
+    class="form-control shadow-sm"
+    placeholder="Enter employee email"
+    formControlName="userEmail"
+  />
+
+  <!-- Validation Messages -->
+  <small class="text-danger"
+    *ngIf="uploadForm.get('userEmail')?.hasError('email') && uploadForm.get('userEmail')?.touched">
+    Please enter a valid email.
+  </small>
+  <small class="text-danger"
+    *ngIf="uploadForm.get('userEmail')?.hasError('notLowercase') && uploadForm.get('userEmail')?.touched">
+    Email must be in lowercase only.
+  </small>
+  <small class="text-danger"
+    *ngIf="uploadForm.get('userEmail')?.hasError('notFound')">
+    Email does not exist in database.
+  </small>
+</div>
+
+
+            <!-- Uploaded By -->
+            <div class="mb-3">
+              <label for="uploadedBy" class="form-label">Uploaded By</label>
+              <input
+                type="email"
+                id="uploadedBy"
+                class="form-control shadow-sm"
+                placeholder="Uploader's email"
+                formControlName="uploadedBy"
+               readonly
+              />
+              <!-- Validation message not needed because field is disabled -->
+            </div>
+
+            <!-- File Upload -->
+            <div class="mb-4">
+              <label for="file" class="form-label">Upload PDF File</label>
+              <input
+                type="file"
+                id="file"
+                class="form-control shadow-sm"
+                (change)="onFileChange($event)"
+                accept="application/pdf"
+              />
+              <small class="text-danger" *ngIf="fileError">{{ fileError }}</small>
+            </div>
+
+            <!-- Submit -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-success px-4">
+                <i class="bi bi-upload me-2"></i> Upload
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

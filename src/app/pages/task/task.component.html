@@ -1,0 +1,33 @@
+<table *ngIf="!loading" class="table table-bordered table-hover table-striped">
+  <thead class="table-dark text-center align-middle">
+    <tr>
+      <th>ID</th>
+      <th>Task Name</th>
+      <th>Description</th>
+      <th>Priority</th>
+      <th>Assign Date</th>
+      <th>Due Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks" class="text-center align-middle">
+      <td>{{ task.id }}</td>
+      <td>{{ task.taskName }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.priority }}</td>
+      <td>{{ task.taskAssignDate | date: 'dd-MM-yyyy' }}</td>
+      <td>{{ task.dueDate | date: 'dd-MM-yyyy' }}</td>
+      <td>
+        <select
+          class="form-select form-select-sm"
+          [(ngModel)]="task.status"
+          (ngModelChange)="updateStatus(task.id, $event)">
+          <option value="PENDING">Pending</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="COMPLETED">Completed</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>

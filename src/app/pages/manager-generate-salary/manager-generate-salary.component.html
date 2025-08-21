@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+          <h4 class="mb-0"><i class="bi bi-cash-stack me-2"></i>Generate Employee Salary</h4>
+        </div>
+        <div class="card-body bg-light rounded-bottom-4">
+          <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" novalidate>
+            
+            <div class="mb-3">
+              <label for="userEmail" class="form-label fw-bold">User Email</label>
+              <input
+                id="userEmail"
+                type="email"
+                class="form-control"
+                formControlName="userEmail"
+                placeholder="Enter user email"
+                required
+              />
+              <div *ngIf="uploadForm.get('userEmail')?.invalid && uploadForm.get('userEmail')?.touched" class="text-danger small mt-1">
+                Please enter a valid email.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="uploadedBy" class="form-label fw-bold">Uploaded By</label>
+              <input
+                id="uploadedBy"
+                type="email"
+                class="form-control"
+                formControlName="uploadedBy"
+                placeholder="Enter uploader email"
+                required
+              />
+              <div *ngIf="uploadForm.get('uploadedBy')?.invalid && uploadForm.get('uploadedBy')?.touched" class="text-danger small mt-1">
+                Please enter a valid email.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="role" class="form-label fw-bold">Role</label>
+              <select id="role" class="form-select" formControlName="role" required>
+                <option value="" disabled>Select Role</option>
+                <option value="HR">HR</option>
+                <option value="SENIOR-HR">SENIOR-HR</option>
+              </select>
+              <div *ngIf="uploadForm.get('role')?.invalid && uploadForm.get('role')?.touched" class="text-danger small mt-1">
+                Please select a role.
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="file" class="form-label fw-bold">Choose File</label>
+              <input type="file" id="file" class="form-control" (change)="onFileChange($event)" required />
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-success px-4 py-2">
+                <i class="bi bi-upload me-2"></i>Upload
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

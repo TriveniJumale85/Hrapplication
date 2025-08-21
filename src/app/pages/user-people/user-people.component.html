@@ -1,0 +1,147 @@
+
+
+<div class="container py-4">
+  <!-- Toggle Buttons -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="btn-toggle-group btn-group">
+      <button class="btn btn-primary" [class.active]="activeTab === 'starred'" (click)="activeTab = 'starred'">Directory</button>
+      <button class="btn btn-outline-primary" [class.active]="activeTab === 'everyone'" (click)="activeTab = 'everyone'">Org Chart</button>
+    </div>
+  </div>
+
+  <!-- Angular Tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'starred'" (click)="activeTab = 'starred'">Starred</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'everyone'" (click)="activeTab = 'everyone'">Everyone</a>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+<!-- Starred Tab -->
+<div *ngIf="activeTab === 'starred'">
+  <div class="row">
+    <!-- Left panel: Search + List -->
+    <div class="col-md-4 border-end">
+      <input type="text" class="form-control mb-3" placeholder="Search starred employee" [(ngModel)]="starredSearchTerm" />
+
+      <div
+        *ngFor="let emp of filteredStarredEmployees()"
+        (click)="selectEmployee(emp)"
+        class="p-2 border mb-2 rounded d-flex justify-content-between align-items-center hover-shadow"
+        [class.bg-light]="selectedEmployee?.id === emp.id"
+        style="cursor: pointer"
+      >
+        <div>
+          <strong>{{ emp.firstName }} {{ emp.lastName }}</strong><br />
+          <small class="text-muted">{{ emp.jobTitle }}</small>
+        </div>
+      </div>
+
+      <p *ngIf="filteredStarredEmployees().length === 0" class="text-muted text-center mt-4">
+        No starred employees found.
+      </p>
+    </div>
+
+    <!-- Right panel: Employee Details with Star -->
+    <div class="col-md-8">
+      <div *ngIf="selectedEmployee; else noSelectionStarred">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <img [src]="selectedEmployee.profilePictureUrl || defaultProfile" alt="Profile" class="rounded-circle mb-3" width="100" height="100" />
+
+            <!-- Name + Star -->
+            <h4 class="d-inline-block align-middle me-2">
+              {{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}
+            </h4>
+            <button class="btn btn-link p-0 align-middle" (click)="toggleStar(selectedEmployee)">
+              <i class="bi" 
+                 [ngClass]="selectedEmployee.isStarred ? 'bi-star-fill text-warning' : 'bi-star'" 
+                 style="font-size: 1.2rem;">
+              </i>
+            </button>
+
+            <p class="text-muted">{{ selectedEmployee.jobTitle }}</p>
+            <span class="badge bg-secondary">{{ selectedEmployee.department }}</span>
+            <div class="mt-3">
+              <p><strong>Email:</strong> {{ selectedEmployee.email }}</p>
+              <p><strong>Phone:</strong> {{ selectedEmployee.phone }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noSelectionStarred>
+        <p class="text-muted mt-4 text-center">Select a starred employee to view details.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Everyone Tab -->
+<div *ngIf="activeTab === 'everyone'">
+  <div class="row">
+    <!-- Left panel: Search + List -->
+    <div class="col-md-4 border-end">
+      <input type="text" class="form-control mb-3" placeholder="Search by name" [(ngModel)]="searchTerm" />
+
+      <div
+        *ngFor="let emp of filteredEmployees()"
+        class="p-2 border mb-2 rounded d-flex justify-content-between align-items-center hover-shadow"
+        [class.bg-light]="selectedEmployee?.id === emp.id"
+        style="cursor: pointer"
+        (click)="selectEmployee(emp)"
+      >
+        <div>
+          <strong>{{ emp.firstName }} {{ emp.lastName }}</strong><br />
+          <small class="text-muted">{{ emp.jobTitle }}</small>
+        </div>
+
+        <!-- Just display star icon, no click event here -->
+        <i class="bi"
+           [ngClass]="emp.isStarred ? 'bi-star-fill text-warning' : 'bi-star'"
+           style="font-size: 1.2rem;">
+        </i>
+      </div>
+    </div>
+
+
+        <!-- Right panel: Employee Details -->
+        <div class="col-md-8">
+          <div *ngIf="selectedEmployee; else noSelection">
+            <div class="card shadow-sm">
+              <div class="card-body text-center">
+                <img [src]="selectedEmployee.profilePictureUrl || defaultProfile" alt="Profile" class="rounded-circle mb-3" width="100" height="100" />
+
+                <!-- Name + Star -->
+                <h4 class="d-inline-block align-middle me-2">
+                  {{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}
+                </h4>
+                <button class="btn btn-link p-0 align-middle" (click)="toggleStar(selectedEmployee)">
+                  <i class="bi" 
+                     [ngClass]="selectedEmployee.isStarred ? 'bi-star-fill text-warning' : 'bi-star'" 
+                     style="font-size: 1.2rem;">
+                  </i>
+                </button>
+
+                <p class="text-muted">{{ selectedEmployee.jobTitle }}</p>
+                <span class="badge bg-secondary">{{ selectedEmployee.department }}</span>
+
+                <div class="mt-3">
+                  <p><strong>Email:</strong> {{ selectedEmployee.email }}</p>
+                  <p><strong>Phone:</strong> {{ selectedEmployee.phone }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noSelection>
+            <p class="text-muted mt-4 text-center">Select an employee to view details.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

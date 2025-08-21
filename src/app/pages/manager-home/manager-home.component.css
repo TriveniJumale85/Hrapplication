@@ -1,0 +1,68 @@
+ 
+         .home {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow-x: scroll;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .time-display {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .payslip-icon {
+            width: 48px;
+            height: 64px;
+            background-color: #e8f5e8;
+            border: 2px solid #28a745;
+        }
+        .track-illustration {
+            width: 80px;
+            height: 80px;
+            background-color: #e3f2fd;
+        }
+        .person-figure {
+            width: 32px;
+            height: 48px;
+            background-color: #007bff;
+        }
+        .notification-badge {
+            font-size: 0.6rem;
+            min-width: 1.2em;
+            height: 1.2em;
+            line-height: 1;
+        }
+.modal-content {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+ 
+.modal-title {
+  font-size: 1.25rem;
+}
+ 
+.table th, .table td {
+  vertical-align: middle;
+}
+ 
+ .holiday-item {
+    padding: 10px 15px;
+    /* border-bottom: 1px solid #f5f5f5; */
+}

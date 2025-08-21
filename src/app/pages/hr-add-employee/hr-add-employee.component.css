@@ -1,0 +1,7 @@
+.is-invalid {
+    border-color: #dc3545;
+  }
+  .text-danger {
+    color: #dc3545 !important;
+  }
+  

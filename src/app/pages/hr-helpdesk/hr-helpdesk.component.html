@@ -1,0 +1,95 @@
+<h5 class="text-start p-3 text-center">Helpdesk</h5>
+
+
+<div class="card">
+  <!-- <div class="card-header bg-info text-white">
+      <h5 class="mb-0">Existing Tickets</h5>
+    </div> -->
+  <div class="card-body p-0">
+    <div *ngIf="isLoading && tickets.length === 0" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && tickets.length === 0" class="text-center py-4">
+      <p class="text-muted">No tickets found</p>
+    </div>
+
+    <div *ngIf="tickets.length > 0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped text-center align-middle shadow">
+          <thead class="table-light">
+            <tr>
+              <th>Employee </th>
+              <th>Category</th>
+              <th>Subject</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Actions</th>
+              <th>Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of tickets">
+              <td>{{ticket.id}}</td>
+              <td>{{ticket.category}}</td>
+              <td>{{ticket.subject}}</td>
+              <td>
+                <span class="badge" [ngClass]="getPriorityClass(ticket.priority)">
+                  {{ticket.priority}}
+                </span>
+              </td>
+
+ <!-- Status -->
+        <td>
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-warning': ticket.helpDeskStatus === 'PENDING',
+              'bg-success': ticket.helpDeskStatus === 'APPROVED',
+              'bg-danger': ticket.helpDeskStatus === 'REJECTED',
+            }">
+             {{ticket.helpDeskStatus}}
+          </span>
+        </td>
+
+
+
+
+              <td>
+                <div class="d-flex justify-content-center">
+
+                <select class="form-select form-select-sm small-select " [value]="ticket.helpDeskStatus || 'PENDING'"
+                  (change)="onStatusChange($event, ticket.id)" [disabled]="ticket.helpDeskStatus === 'CANCELLED'">
+                  <option value="" disabled>Update status</option>
+                  <option *ngFor="let status of helpDeskStatuses" [value]="status">
+                    {{ status }}
+                  </option>
+                </select>
+
+                <div class="ms-2">
+                  <button class=" btn btn-sm btn-secondary" (click)="deleteTicket(ticket.id)">DELETE</button>
+                </div>
+              </div>
+
+              </td>
+              <td>
+                <button *ngIf="ticket.attachedFile" class="btn btn-sm btn-secondary " (click)="downloadFile(ticket.id)">
+                  Download
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

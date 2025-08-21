@@ -1,0 +1,252 @@
+<!-- <div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-outline-secondary btn-sm">&lt; Prev</button>
+    <h4 class="text-primary mb-0">June 2025</h4>
+    <button class="btn btn-outline-secondary btn-sm">Next &gt;</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead class="table-light">
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead>
+      <tbody> -->
+<!-- Week 1 -->
+<!-- <tr>
+          <td class="bg-light text-muted small">01<br><span>O</span></td>
+          <td class="bg-warning-subtle">02<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">03<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">04<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">05<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle text-danger">06<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-light text-muted small">07<br><span>O</span></td>
+        </tr> -->
+
+<!-- Week 2 -->
+<!-- <tr>
+          <td class="bg-light text-muted small">08<br><span>O</span></td>
+          <td class="bg-success-subtle">09<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle text-danger">10<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle text-danger">11<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">12<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">13<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-light text-muted small">14<br><span>O</span></td>
+        </tr> -->
+
+<!-- Week 3 -->
+<!-- <tr>
+          <td class="bg-light text-muted small">15<br><span>O</span></td>
+          <td class="bg-warning-subtle text-danger">16<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle text-danger">17<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">18<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">19<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle text-danger">20<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-light text-muted small">21<br><span>O</span></td>
+        </tr> -->
+
+<!-- Week 4 -->
+<!-- <tr>
+          <td class="bg-light text-muted small">22<br><span>O</span></td>
+          <td class="bg-warning-subtle">23<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle text-danger">24<br><strong>A</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">25<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">26<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-warning-subtle">27<br><strong>P</strong><br><small>GEN</small></td>
+          <td class="bg-light text-muted small">28<br><span>O</span></td>
+        </tr> -->
+
+<!-- Week 5 -->
+<!-- <tr>
+          <td class="bg-light text-muted small">29<br><span>O</span></td>
+          <td class="bg-info-subtle border border-primary">30<br><strong>30</strong><br><small>GEN</small></td>
+          <td class="bg-light-subtle"></td>
+          <td class="bg-light-subtle"></td>
+          <td class="bg-light-subtle"></td>
+          <td class="bg-light-subtle"></td>
+          <td class="bg-light-subtle"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<!-- ! new code with maaping  -->
+<!--
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-outline-secondary btn-sm" (click)="goToPreviousMonth()">&lt; Prev</button>
+    <h4 class="text-primary mb-0">{{ currentMonthName }} {{ currentYear }}</h4>
+    <button class="btn btn-outline-secondary btn-sm" (click)="goToNextMonth()">Next &gt;</button>
+  </div>
+
+  <div class="row">
+    <div class="col-12 d-flex flex-wrap">
+      <div
+        *ngFor="let day of monthDays"
+        class="border m-1 text-center p-2"
+        style="width: 13%; min-height: 100px;"
+        [ngClass]="{
+          'bg-success-subtle': getAttendanceForDate(day)?.status === 'P',
+          'bg-danger-subtle': getAttendanceForDate(day)?.status === 'A',
+          'bg-light': !getAttendanceForDate(day)
+        }"
+      >
+        <div class="fw-bold">{{ day.split('-')[2] }}</div>
+
+        <div *ngIf="getAttendanceForDate(day)">
+          <strong>{{ getAttendanceForDate(day)?.status }}</strong><br />
+          <small>{{ getAttendanceForDate(day)?.shift }}</small>
+        </div>
+        <div *ngIf="!getAttendanceForDate(day)">
+          <small>No Data</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- ? design change  -->
+
+<div class="container mt-4" style="overflow-y: scroll; height: 80vh;">
+  <!-- Top Bar -->
+  <div class="d-flex justify-content-around align-items-center mb-3 border-bottom pb-3">
+    <button class="btn btn-outline-primary btn-sm" (click)="goToPreviousMonth()">&lt; Prev</button>
+    <h4 class="text-primary mb-0">{{ currentMonthName }} {{ currentYear }}</h4>
+    <button class="btn btn-outline-primary btn-sm" (click)="goToNextMonth()">Next &gt;</button>
+  </div>
+
+  <!-- Week Days Header -->
+  <div class="row fw-bold  border-bottom pb-2 mb-2 px-auto">
+    <div class="col" *ngFor="let day of weekDays">{{ day }}</div>
+  </div>
+
+  <!-- Calendar Body -->
+  <div class="row flex-wrap">
+    <!-- Blank spaces before first day -->
+    <div
+      *ngFor="let blank of blanksBeforeFirstDay"
+      class="m-1 p-2"
+      style="width: 13%; min-height: 100px; visibility: hidden;"
+    ></div>
+
+    <!-- Actual Days -->
+    <div
+      *ngFor="let day of monthDays"
+      class="border m-1 p-2 text-center"
+      style="width: 13%; min-height: 100px;"
+      [ngClass]="{
+        'bg-success-subtle': getAttendanceForDate(day)?.status === 'P',
+        'bg-danger-subtle': getAttendanceForDate(day)?.status === 'A',
+        'bg-info-subtle': getAttendanceForDate(day)?.status === 'O',
+        'bg-warning-subtle': getAttendanceForDate(day)?.status === 'L',
+        'bg-light': !getAttendanceForDate(day)
+      }"
+    >
+      <!-- Day Number -->
+      <div class="d-flex justify-content-start">
+        <div class="fw-bold">{{ day.split('-')[2] }}</div>
+      </div>
+
+      <!-- Status & Shift -->
+      <div *ngIf="getAttendanceForDate(day)">
+        <strong>{{ getAttendanceForDate(day)?.status }}</strong><br />
+        <div class="d-flex justify-content-end">
+          <small>{{ getAttendanceForDate(day)?.shift }}</small>
+        </div>
+      </div>
+
+      <!-- No Data -->
+      <!-- <div *ngIf="!getAttendanceForDate(day)">
+        <small>No Data</small>
+      </div> -->
+    </div>
+  </div>
+
+
+
+<div class="card mt-4">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <strong>Legends</strong>
+    <i class="bi bi-chevron-up"></i>
+  </div>
+  <div class="card-body">
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+      <div class="d-flex align-items-center">
+        <span class="badge bg-success me-2">P</span> Present
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-danger me-2">A</span> Absent
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-dark text-white me-2">O</span> Off Day
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-secondary text-white me-2">R</span> Rest Day
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-light text-dark border me-2">L</span> Leave
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-warning text-dark me-2">OD</span> On Duty
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-info text-dark me-2">H</span> Holiday
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-warning text-dark me-2">AD</span> Alert for Deduction
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-danger-subtle text-dark me-2">D</span> Deduction
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="badge bg-light border me-2">?</span> Status Unknown
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-clock-history text-secondary me-2"></i> Overtime
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-pencil-square text-primary me-2"></i> Override
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-caret-up-fill text-info me-2"></i> Permission
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-caret-left-fill text-secondary me-2"></i> Ignored
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-caret-right-fill text-primary me-2"></i> Grace
+      </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="fw-bold text-muted mb-2">Day Type</div>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-cup-hot me-2"></i> Rest Day
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-tv me-2"></i> Off Day
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-cloud-sun me-2"></i> Holiday
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-calendar2-week me-2"></i> Half Day
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-x-circle me-2"></i> Plant Shutdown
+      </div>
+    </div>
+  </div>
+</div>
+</div>

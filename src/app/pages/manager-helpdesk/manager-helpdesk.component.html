@@ -1,0 +1,105 @@
+<h5 class="text-start p-3">Helpdesk</h5>
+
+<div class="row mb-3">
+  <div class="col-md-4">
+    <label class="form-label">Filter by Status</label>
+    <select
+      class="form-select"
+      [(ngModel)]="selectedStatus"
+      (change)="filterByStatus()"
+      name="status"
+    >
+      <option value="">All</option>
+      <option *ngFor="let s of statusList" [value]="s">{{ s }}</option>
+    </select>
+  </div>
+  <div class="col-md-4 align-self-end">
+    <button class="btn btn-outline-secondary" (click)="resetFilters()">
+      Reset
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-info text-white">
+    <h5 class="mb-0">Existing Tickets</h5>
+  </div>
+  <div class="card-body p-0">
+    <div *ngIf="isLoading && tickets.length === 0" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && tickets.length === 0" class="text-center py-4">
+      <p class="text-muted">No tickets found</p>
+    </div>
+
+    <div *ngIf="tickets.length > 0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Category</th>
+              <th>Subject</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Actions</th>
+              <th>Update Status</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of tickets">
+              <td>{{ ticket.id }}</td>
+              <td>{{ ticket.category }}</td>
+              <td>{{ ticket.subject }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="getPriorityClass(ticket.priority)"
+                >
+                  {{ ticket.priority }}
+                </span>
+              </td>
+
+              <td>{{ ticket.helpDeskStatus }}</td>
+
+              <td>
+                <button
+                  class="btn btn-sm btn-danger me-2"
+                  (click)="deleteTicket(ticket.id)"
+                >
+                  Delete
+                </button>
+
+                <button
+                  *ngIf="ticket.attachedFile"
+                  class="btn btn-sm btn-secondary"
+                  (click)="downloadFile(ticket.id)"
+                >
+                  Download
+                </button>
+
+              </td>
+              <td>
+                <button class="btn btn-sm  ms-2" >
+                <select
+                  class="form-select form-select-sm "
+                  [ngModel]="ticket.helpDeskStatus"
+                  (ngModelChange)="updateStatus(ticket.id, $event)"
+                >
+                  <option *ngFor="let status of statusList" [value]="status">
+                    {{ status }}
+                  </option>
+                </select>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

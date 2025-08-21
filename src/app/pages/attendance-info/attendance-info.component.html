@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Employee Attendance Info</h2>
+
+  <table class="table table-bordered table-hover shadow">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Employee Name</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>In Time</th>
+        <th>Out Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let attendance of attendanceData; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ attendance.name }}</td>
+        <td>{{ attendance.date }}</td>
+        <td>
+          <span class="badge bg-success" *ngIf="attendance.status === 'Present'">Present</span>
+          <span class="badge bg-danger" *ngIf="attendance.status === 'Absent'">Absent</span>
+          <span class="badge bg-warning text-dark" *ngIf="attendance.status === 'Leave'">Leave</span>
+        </td>
+        <td>{{ attendance.inTime }}</td>
+        <td>{{ attendance.outTime }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

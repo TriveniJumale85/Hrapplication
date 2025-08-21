@@ -1,0 +1,76 @@
+body {
+
+  padding: 20px;
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.request-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.request-form-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in;
+}
+
+.form-title {
+  font-weight: 600;
+  color: #2d3436;
+  font-size: 18px;
+}
+
+.form-label {
+  font-size: 13px;
+  color: #555;
+}
+
+input.form-control-sm,
+textarea.form-control-sm,
+select.form-select-sm {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdde1;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: none;
+  border-color: #a29bfe;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 6px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(90deg, #a29bfe, #6c5ce7);
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

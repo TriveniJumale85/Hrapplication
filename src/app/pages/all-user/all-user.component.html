@@ -1,0 +1,104 @@
+<!-- <div class="container mt-4">
+  <h3 class="mb-3">Our Employee </h3>
+
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Job</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ emp.firstName }} {{ emp.lastName }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.jobTitle }}</td>
+        <td>{{ emp.role }}</td>
+        <td>{{ emp.status }}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-1" (click)="edit(emp)">Edit</button>
+          <button class="btn btn-sm btn-outline-danger" (click)="delete(emp.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal fade" id="employeeModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isEdit ? 'Edit' : 'Add' }} Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeModalBtn"></button>
+        </div>
+        <div class="modal-body row g-3">
+
+
+           <div class="col-md-6">
+            <label>First Name</label>
+            <input formControlName="firstName" class="form-control" />
+          </div>
+
+          <div class="col-md-6">
+            <label>Last Name</label>
+            <input formControlName="lastName" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <input type="email" formControlName="email" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label>Phone</label>
+            <input formControlName="phone" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label>Department</label>
+            <input formControlName="department" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label>Job Title</label>
+            <input formControlName="jobTitle" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label>Role</label>
+            <select class="form-select" formControlName="role">
+              <option value="EMPLOYEE">EMPLOYEE</option>
+              <option value="HR">HR</option>
+              <option value="SENIOR_HR">SENIOR_HR</option>
+              <option value="MANAGER">MANAGER</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>Status</label>
+            <select class="form-select" formControlName="status">
+              <option value="Active">Active</option>
+              <option value="On Notice">On Notice</option>
+              <option value="Resigned">Resigned</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>Joining Date</label>
+            <input type="date" class="form-control" formControlName="joiningDate" />
+          </div>
+          <div class="col-md-6">
+            <label>Exit Date</label>
+            <input type="date" class="form-control" formControlName="exitDate" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">{{ isEdit ? 'Update' : 'Add' }}</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> --> -->

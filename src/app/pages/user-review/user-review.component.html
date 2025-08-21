@@ -1,0 +1,15 @@
+<div class="user-reviews">
+  <h2>User Performance Reviews</h2>
+
+  <div *ngIf="reviews.length > 0; else noReviews">
+    <div *ngFor="let review of reviews" class="review-card">
+      <h3>Task: {{ review.taskName }}</h3>
+      <p><strong>Manager Review:</strong> {{ review.managerReview }}</p>
+      <p><strong>Review Date:</strong> {{ review.reviewDate }}</p>
+    </div>
+  </div>
+
+  <ng-template #noReviews>
+    <p>No reviews available for this user.</p>
+  </ng-template>
+</div>

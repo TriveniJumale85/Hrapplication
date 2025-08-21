@@ -1,0 +1,109 @@
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="row w-100 shadow-lg rounded overflow-hidden" style="max-width: 960px">
+    
+    <!-- Left login form -->
+    <div class="col-md-6 bg-white p-5">
+      <!-- Logo -->
+      <div class="mb-4">
+        <img
+          src="./assets/OpenFuture.jpeg"
+          alt="logo"
+          width="200"
+          class="me-1"
+        />
+        <strong></strong>
+      </div>
+
+      <!-- Title -->
+      <h3 class="fw-bold mb-1">Welcome back</h3>
+      <p class="text-muted mb-4">Please enter your details</p>
+
+      <!-- Login Form -->
+      <form (ngSubmit)="login()">
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="example@gmail.com"
+            [(ngModel)]="email"
+            name="email"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3 position-relative">
+          <label for="password" class="form-label">Password</label>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            placeholder="Example@123"
+            [(ngModel)]="password"
+            name="password"
+            class="form-control pe-5"
+            required
+          />
+          <i
+            class="fa"
+            [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePassword()"
+            style="
+              position: absolute;
+              top: 38px;
+              right: 15px;
+              cursor: pointer;
+              color: #6c757d;
+            "
+          ></i>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-primary w-100" type="submit">
+          Sign in
+        </button>
+
+        <!-- Forgot Password Link -->
+        <div class="text-center mt-3">
+          <a
+            routerLink="/forgot-password"
+            style="cursor: pointer; color: #007bff; text-decoration: underline;"
+            >Forgot Password?</a
+          >
+        </div>
+      </form>
+
+      <!-- In-page Bootstrap alert -->
+      <div *ngIf="message" class="alert alert-{{ alertType }} mt-3" role="alert">
+        {{ message }}
+      </div>
+    </div>
+
+    <!-- Right-side image -->
+    <div class="col-md-6 p-0 d-none d-md-block">
+      <div
+        class="h-100 w-100"
+        style="
+          background-image: url('https://images.unsplash.com/photo-1531535807748-218331acbcb4?q=80&w=1374&auto=format&fit=crop');
+          background-size: cover;
+          background-position: center;
+          position: relative;
+        "
+      >
+        <div
+          class="position-absolute bottom-0 p-4 text-white"
+          style="background: rgba(0, 0, 0, 0.4); width: 100%"
+        >
+          <h5 class="fw-bold">Bring your ideas to life.</h5>
+          <p class="mb-0">
+            Sign up for free and enjoy access to all features for 30 days. No
+            credit card required.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

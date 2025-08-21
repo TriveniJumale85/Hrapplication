@@ -1,0 +1,88 @@
+.hr-leave-panel {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hr-leave-panel h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+}
+
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+select {
+  padding: 6px 10px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  td::before {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #666;
+  }
+
+  td:nth-of-type(1)::before { content: "ID"; }
+  td:nth-of-type(2)::before { content: "Employee ID"; }
+  td:nth-of-type(3)::before { content: "From"; }
+  td:nth-of-type(4)::before { content: "To"; }
+  td:nth-of-type(5)::before { content: "Reason"; }
+  td:nth-of-type(6)::before { content: "Type"; }
+  td:nth-of-type(7)::before { content: "Status"; }
+  td:nth-of-type(8)::before { content: "Update Status"; }
+}

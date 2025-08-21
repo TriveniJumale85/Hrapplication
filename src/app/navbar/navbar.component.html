@@ -1,0 +1,133 @@
+<nav class="navbar navbar-expand-lg border-bottom bg-white">
+  <div class="container-fluid">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHRMS"
+      aria-controls="navbarHRMS" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- <a class="navbar-brand ms-3" href="#">
+      <img src="../../assets/OpenFuture.jpeg" alt="OpenFuture Logo" class="logo" style="height: 40px;">
+    </a> -->
+
+
+    <div class="collapse navbar-collapse" id="navbarHRMS">
+
+      <!-- Right side: Profile Dropdown -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+
+            <div class="">
+              <img [src]="profileImageUrl" alt="Profile Picture" class="rounded-circle border-5 shadow-sm" width="50"
+                height="50">
+            </div>
+
+            <i class="bi bi-caret-down-fill ms-2"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-4">
+
+            <li>
+              <h6 class="dropdown-header text-muted">Account</h6>
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" (click)="openProfileModal()">
+                <i class="bi bi-person-circle me-2 fs-5 text-primary"></i> Update Profile Picture
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" (click)="openPasswordModal()">
+                <i class="bi bi-lock-fill me-2 fs-5 text-success"></i> Update Password
+              </a>
+            </li>
+
+            <!-- <li>
+              <a class="dropdown-item d-flex align-items-center" routerLink="/settings">
+                <i class="bi bi-gear-fill me-2 fs-5 text-secondary"></i> Settings
+              </a>
+            </li> -->
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center text-danger" (click)="logout()">
+                <i class="bi bi-box-arrow-right me-2 fs-5"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+</nav>
+
+<!-- Password Modal -->
+<div class="modal fade" id="updatePasswordModal" #updatePasswordModal tabindex="-1"
+  aria-labelledby="updatePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Update Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="newPassword" class="form-label">New Password</label>
+<div class="input-group">
+  <input [type]="showPassword ? 'text' : 'password'"
+         id="newPassword"
+         class="form-control"
+         formControlName="newPassword"
+         required>
+  <span class="input-group-text" (click)="togglePasswordVisibility()" style="cursor: pointer;">
+    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"></i>
+  </span>
+</div>
+</div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-success">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Picture Modal -->
+<div class="modal fade" id="updateProfileModal" #updateProfileModal tabindex="-1"
+  aria-labelledby="updateProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Update Profile Picture</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onProfileSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Select Profile Picture</label>
+            <input type="file" class="form-control"
+                   (change)="onFileSelected($event)"
+                   accept="image/png, image/jpeg, image/jpg, image/gif"
+                   required>
+            <!-- Validation Message -->
+            <div *ngIf="fileError" class="text-danger mt-1">
+              {{ fileError }}
+            </div>
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-success">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<p>hr-document-centre works!</p>
+<!-- document-center.component.html -->
+<div class="container py-4">
+    <div class="card shadow-sm p-4 mb-4 d-flex flex-md-row justify-content-between align-items-center">
+      <div class="text-start">
+        <h4 class="fw-bold">We've got it sorted for you!</h4>
+        <p class="text-muted mb-0">All Documents are now in one place..</p>
+        <p class="text-muted">You can now request a new letter if you don't find the one you were looking for..</p>
+      </div>
+      <div class="text-center">
+        <img src="assets/images/document-illustration.png" alt="illustration" class="img-fluid" style="max-height: 120px;">
+      </div>
+    </div>
+  
+    <div class="section mb-4">
+      <h6 class="fw-bold">Documents</h6>
+      <div class="row g-3">
+        <div class="col-md-3 col-6" *ngFor="let doc of documents">
+          <div class="card shadow-sm p-3 h-100">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i [class]="doc.icon" style="font-size: 1.5rem;"></i>
+                <span class="fw-semibold ms-2">{{ doc.title }}</span>
+              </div>
+              <a [routerLink]="doc.link" class="text-primary fw-semibold">View All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="section">
+      <h6 class="fw-bold">Request</h6>
+      <div class="row g-3">
+        <div class="col-md-3 col-6">
+          <div class="card shadow-sm p-3 h-100">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <i class="bi bi-envelope" style="font-size: 1.5rem;"></i>
+                <span class="fw-semibold ms-2">Letters</span>
+              </div>
+              <a routerLink="/letters" class="text-primary fw-semibold">View All</a>
+            </div>
+            <div class="mt-2 ms-4">
+              <p class="mb-0 text-muted">Pending: <strong>0</strong></p>
+              <p class="mb-0 text-muted">Closed: <strong>0</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+

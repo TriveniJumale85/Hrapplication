@@ -1,0 +1,104 @@
+<div class="container mt-5">
+  <h4 class="text-center">Leave Summary</h4>
+
+  <!-- ✅ Latest Leave Status -->
+  <div *ngIf="latestLeaveStatus" class="alert mt-3" 
+       [ngClass]="{
+         'alert-success': latestLeaveStatus === 'APPROVED',
+         'alert-danger': latestLeaveStatus === 'REJECTED',
+         'alert-warning': latestLeaveStatus === 'PENDING'
+       }">
+    
+    <strong>Leave Status:</strong> Your last leave 
+    (From: {{ latestLeaveFromDate | date:'dd MMM yyyy' }} 
+     To: {{ latestLeaveToDate | date:'dd MMM yyyy' }}) 
+    was <strong>{{ latestLeaveStatus }}</strong>.
+
+    <!-- ✅ Remark -->
+    <div *ngIf="remark" class="mt-2">
+      <strong>Remark:</strong> {{ remark }}
+    </div>
+
+    <button *ngIf="latestLeaveStatus === 'PENDING'"
+            class="btn btn-sm btn-outline-danger ms-2"
+            (click)="withdrawLeave(latestLeaveId!)">
+      Withdraw
+    </button>
+  </div>
+
+  <!-- 🧾 Total Approved Leaves -->
+  <div class="alert alert-info text-center mt-3">
+    <strong>Total Approved Leaves:</strong> {{ totalApprovedLeaves }}
+  </div>
+
+  <!-- 📊 Leave Breakdown -->
+  <div class="row text-center mt-4">
+
+    <!-- Sick Leave -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header bg-primary text-white">Sick Leave</div>
+        <div class="card-body">
+          Used: {{ sickLeaveUsed }} / 3 <br />
+          Remaining: {{ 3 - sickLeaveUsed }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Casual Leave -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header bg-success text-white">Casual Leave</div>
+        <div class="card-body">
+          Used: {{ casualLeaveUsed }} / 3 <br />
+          Remaining: {{ 3 - casualLeaveUsed }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample Leave -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header bg-warning text-dark">Sample Leave</div>
+        <div class="card-body">
+          Used: {{ sampleLeaveUsed }} / 3 <br />
+          Remaining: {{ 3 - sampleLeaveUsed }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Paid Leave -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header bg-primary text-dark">Paid Leave</div>
+        <div class="card-body">
+          Used: {{ paidleaveUsed }} / 3 <br />
+          Remaining: {{ 3 - paidleaveUsed }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Unpaid Leave -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header bg-danger text-white">Unpaid Leave</div>
+        <div class="card-body">
+          Used: {{ unpaidLeaveUsed }} / 3 <br />
+          Remaining: {{ 3 - unpaidLeaveUsed }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Maternity Leave -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header bg-info text-white">Maternity Leave</div>
+        <div class="card-body">
+          Used: {{ maternityLeaveUsed }} / 180 <br />
+          Remaining: {{ 180 - maternityLeaveUsed }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

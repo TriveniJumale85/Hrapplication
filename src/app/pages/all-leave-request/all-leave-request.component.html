@@ -1,0 +1,80 @@
+<div class="container mt-5 mb-5 p-4 shadow rounded bg-light">
+  <h2 class="text-center text-primary mb-4">Apply for Leave</h2>
+
+  <form [formGroup]="leaveForm" (ngSubmit)="submitForm()">
+    <div class="row mb-3">
+      <label for="employeeId" class="col-sm-3 col-form-label">Employee ID:</label>
+      <div class="col-sm-9">
+        <input type="number" class="form-control" id="employeeId" placeholder="Enter your employee ID" formControlName="employeeId">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="fromDate" class="col-sm-3 col-form-label">From Date:</label>
+      <div class="col-sm-9">
+        <input type="date" class="form-control" id="fromDate" formControlName="fromDate">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="toDate" class="col-sm-3 col-form-label">To Date:</label>
+      <div class="col-sm-9">
+        <input type="date" class="form-control" id="toDate" formControlName="toDate">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="reason" class="col-sm-3 col-form-label">Reason:</label>
+      <div class="col-sm-9">
+        <textarea class="form-control" id="reason" rows="3" placeholder="State your reason for leave" formControlName="reason"></textarea>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="applyingTo" class="col-sm-3 col-form-label">Manager Email:</label>
+      <div class="col-sm-9">
+        <input type="email" class="form-control" id="applyingTo" placeholder="Enter manager's email" formControlName="applyingTo">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="ccTo" class="col-sm-3 col-form-label">CC To:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="ccTo" placeholder="Enter comma-separated emails" formControlName="ccTo">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="contactDetails" class="col-sm-3 col-form-label">Contact Details:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="contactDetails" placeholder="Enter your contact info" formControlName="contactDetails">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="leaveType" class="col-sm-3 col-form-label">Leave Type:</label>
+      <div class="col-sm-9">
+        <select class="form-select" id="leaveType" formControlName="leaveType">
+          <option value="">Select leave type</option>
+          <option *ngFor="let type of leaveTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <label for="file" class="col-sm-3 col-form-label">Attachment:</label>
+      <div class="col-sm-9">
+        <input type="file" class="form-control" id="file" (change)="onFileChange($event)">
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-success px-4 py-2" [disabled]="leaveForm.invalid">
+        Submit Leave Request
+      </button>
+    </div>
+    
+  </form>
+</div>
+
+ 

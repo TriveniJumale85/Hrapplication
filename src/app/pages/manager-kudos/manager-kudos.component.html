@@ -1,0 +1,21 @@
+<div class="kudos-container">
+    <div class="tabs">
+      <span [class.active]="selectedTab === 'received'" (click)="selectedTab('received')">Received</span>
+      <span [class.active]="selectedTab === 'given'" (click)="selectedTab('given')">Given</span>
+    </div>
+   
+    <div class="kudos-content">
+      <img src="https://cdn-icons-png.flaticon.com/512/456/456115.png" alt="thumb" class="thumb" />
+      <h2>Get going!</h2>
+      <p>All the Kudos you have received will appear here.</p>
+      <button class="btn">Go to Engage</button>
+    </div>
+   
+    <footer class="footer">
+      <span>v6.3.0-prod-1043</span> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms Of Service</a>
+    </footer>
+  </div>
+   
+

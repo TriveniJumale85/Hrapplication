@@ -1,0 +1,99 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Pending Regularization & Permission Requests</h2>
+
+  <div class="table-responsive">
+    <table *ngIf="pendingRequests.length > 0" class="table table-bordered table-hover table-striped text-center align-middle shadow">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Employee ID</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Clock In</th>
+          <th>Clock Out</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of pendingRequests">
+          <td>{{ request.id }}</td>
+          <td>{{ request.employee.id }}</td>
+          <td>{{ request.requestType }}</td>
+          <td>{{ request.date }}</td>
+          <td>{{ request.clockIn || '-' }}</td>
+          <td>{{ request.clockOut || '-' }}</td>
+          <td>{{ request.reason }}</td>
+          <td><span class="fw-bold text-warning">{{ request.approvalStatus }}</span></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Actions
+              </button>
+              <ul class="dropdown-menu text-center">
+                <li><button class="dropdown-item" (click)="approve(request.id)">Approve</button></li>
+                <li><button class="dropdown-item" (click)="reject(request.id)">Reject</button></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><button class="dropdown-item text-danger" (click)="deleteRequest(request.id)">Delete</button></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="pendingRequests.length === 0" class="text-muted text-center">No pending requests found.</p>
+
+  <hr class="my-5" />
+
+  <h2 class="mb-4 text-center">Approved / Rejected Requests</h2>
+
+  <div class="table-responsive">
+    <table *ngIf="processedRequests.length > 0" class="table table-bordered table-hover table-striped text-center align-middle shadow">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Employee ID</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Clock In</th>
+          <th>Clock Out</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of processedRequests">
+          <td>{{ request.id }}</td>
+          <td>{{ request.employee.id }}</td>
+          <td>{{ request.requestType }}</td>
+          <td>{{ request.date }}</td>
+          <td>{{ request.clockIn || '-' }}</td>
+          <td>{{ request.clockOut || '-' }}</td>
+          <td>{{ request.reason }}</td>
+          <td>
+            <span
+              class="fw-bold"
+              [ngClass]="{
+                'text-success': request.approvalStatus === 'APPROVED',
+                'text-danger': request.approvalStatus === 'REJECTED'
+              }"
+            >
+              {{ request.approvalStatus }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteRequest(request.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="processedRequests.length === 0" class="text-muted text-center">No approved or rejected requests found.</p>
+</div>

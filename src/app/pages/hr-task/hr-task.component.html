@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h3>Create Task</h3>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+  
+
+<div class="mb-3">
+  <label class="form-label">Select Employee</label>
+  <ng-select
+    [items]="employees"
+    bindLabel="fullName"
+    bindValue="id"
+    [searchable]="true"
+    placeholder="Select employee"
+    formControlName="employeeId">
+  </ng-select>
+</div>
+
+
+    <div class="mb-3">
+      <label class="form-label">TaskName</label>
+      <input type="text" class="form-control" formControlName="taskName" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Due Date</label>
+      <input type="date" class="form-control" formControlName="dueDate" />
+    </div>
+
+
+    <div class="mb-3">
+      <label class="form-label">Attachment (optional)</label>
+      <input type="file" class="form-control" (change)="onFileChange($event)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Task</button>
+  </form>
+
+</div>
+
+
+

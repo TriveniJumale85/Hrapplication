@@ -1,0 +1,124 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-outline-primary mb-3" data-bs-toggle="modal" data-bs-target="#reviewModal" (click)="resetForm()">+ Add Review</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reviewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form #reviewForm="ngForm" (ngSubmit)="submitReview(reviewForm)">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ isEdit ? 'Edit' : 'Add' }} Review</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetForm()"></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Employee ID -->
+            <div class="mb-3">
+              <label class="form-label">Enter Employee ID</label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="review.employee.id"
+                name="employeeId"
+                required
+                min="1"
+                (input)="preventNegative($event)"
+                (change)="onEmployeeIdEntered(review.employee.id)"
+                #empId="ngModel" />
+              <div *ngIf="empId.invalid && empId.touched" class="text-danger">
+                Employee ID must be greater than 0
+              </div>
+            </div>
+
+            <!-- Task Dropdown -->
+            <div class="mb-3" *ngIf="!isEdit">
+              <label class="form-label">Select Task</label>
+              <select
+                class="form-select"
+                [(ngModel)]="review.task.id"
+                name="taskId"
+                required
+                (change)="onTaskChange(review.task.id)"
+                #taskId="ngModel">
+                <option value="">Select Task</option>
+                <option *ngFor="let task of tasks" [value]="task.id">
+                  {{ task.taskName }} (ID: {{ task.id }})
+                </option>
+              </select>
+              <div *ngIf="taskId.invalid && taskId.touched" class="text-danger">Task is required</div>
+            </div>
+
+            <!-- Task Name -->
+            <div class="mb-3">
+              <label class="form-label">Task Name</label>
+              <input type="text" class="form-control" [(ngModel)]="review.taskName" name="taskName" readonly />
+            </div>
+
+            <!-- Manager Review -->
+            <div class="mb-3">
+              <label class="form-label">Manager Review</label>
+              <textarea
+                class="form-control"
+                [(ngModel)]="review.managerReview"
+                name="managerReview"
+                required
+                #managerReview="ngModel"></textarea>
+              <div *ngIf="managerReview.invalid && managerReview.touched" class="text-danger">Review is required</div>
+            </div>
+
+            <!-- Review Date -->
+            <div class="mb-3">
+              <label class="form-label">Review Date</label>
+              <input
+                type="date"
+                class="form-control"
+                [(ngModel)]="review.reviewDate"
+                name="reviewDate"
+                [min]="review.reviewDate"
+                [max]="review.reviewDate"
+                readonly />
+              <small class="text-muted">This date is auto-filled and cannot be changed.</small>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success" [disabled]="reviewForm.invalid">
+              {{ isEdit ? 'Update' : 'Submit' }}
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive mt-4">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Employee ID</th>
+          <th>Task Name</th>
+          <th>Manager Review</th>
+          <th>Review Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let r of reviews">
+          <td>{{ r.employee.id }}</td>
+          <td>{{ r.taskName }}</td>
+          <td>{{ r.managerReview }}</td>
+          <td>{{ r.reviewDate }}</td>
+          <td>
+            <button class="btn btn-outline-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reviewModal" (click)="editReview(r)">Edit</button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteReview(r.reviewId!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

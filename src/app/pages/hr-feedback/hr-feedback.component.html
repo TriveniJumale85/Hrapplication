@@ -1,0 +1,27 @@
+<div class="feedback-container">
+    <div class="header">
+      <span class="breadcrumb">My Worklife / Feedback</span>
+      <button class="top-btn">Request Feedback</button>
+      <button class="top-btn">Give Feedback</button>
+    </div>
+   
+    <div class="tabs">
+      <span *ngFor="let tab of tabs" [class.active]="tab === activeTab" (click)="setTab(tab)">
+        {{ tab }}
+      </span>
+    </div>
+   
+    <div class="content">
+      <img src="https://cdn-icons-png.flaticon.com/512/456/456212.png" alt="Feedback" class="img" />
+      <h2>Seeking Advice?</h2>
+      <p>Let’s gather a new outlook from your coworkers.</p>
+      <button class="btn">Request Feedback</button>
+    </div>
+   
+    <footer class="footer">
+      <span>v6.3.0-prod-1043</span> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms Of Service</a>
+    </footer>
+  </div>
+

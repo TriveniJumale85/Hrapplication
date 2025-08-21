@@ -1,0 +1,146 @@
+<div class="container-fluid bg-light min-vh-100 p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h5 class="mb-1 fw-semibold">Hey ,</h5>
+      <p class="mb-0 text-muted">Ready to dive in ?</p>
+    </div>
+    <div class="d-flex gap-3">
+      <div class="text-center px-3 py-2 rounded border border-danger bg-white shadow-sm">
+        <span class="d-block text-danger fw-bold">Give Engage.</span>
+      </div>
+      <div class="text-center px-3 py-2 rounded border border-info bg-white shadow-sm">
+        <span class="d-block text-info fw-bold">Create Polls</span>
+      </div>
+      <div class="text-center px-3 py-2 rounded border border-secondary bg-white shadow-sm">
+        <span class="d-block text-secondary fw-bold">Create Possts</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <div class="bg-white p-3 shadow-sm rounded mb-3">
+        <h6 class="mb-3">Filtersss</h6>
+        <div class="mb-2">
+          <label class="d-block">
+            <input type="radio" name="activity" /> All Activities
+          </label>
+          <label class="d-block">
+            <input type="radio" name="activity" checked /> Engage
+          </label>
+          <label class="d-block">
+            <input type="radio" name="activity" /> Polls
+          </label>
+          <label class="d-block">
+            <input type="radio" name="activity" /> Posts
+          </label>
+        </div>
+
+        <input type="text" class="form-control mb-3" placeholder="Search" />
+
+        <!-- Groups -->
+        <div class="mb-2">
+          <button class="btn w-100 text-start" data-bs-toggle="collapse" data-bs-target="#groupDropdown" aria-expanded="false" aria-controls="groupDropdown">
+            <strong>Groups</strong>
+          </button>
+          <div class="collapse" id="groupDropdown">
+            <ul class="list-unstyled ms-2">
+              <li><input type="checkbox" /> Appreciations</li>
+              <li><input type="checkbox" /> Buy/Sell/Rent</li>
+              <li><input type="checkbox" /> Company News</li>
+              <li><input type="checkbox" /> Events</li>
+              <li><input type="checkbox" /> Everyone</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-2">
+          <button class="btn w-100 text-start" data-bs-toggle="collapse" data-bs-target="#locationDropdown" aria-expanded="false" aria-controls="locationDropdown">
+            <strong>Location</strong>
+          </button>
+          <div class="collapse" id="locationDropdown" style="max-height: 200px; overflow-y: auto;">
+            <ul class="list-unstyled ms-2">
+              <li><input type="checkbox" /> Akola</li>
+              <li><input type="checkbox" /> Amravati</li>
+              <li><input type="checkbox" /> Aurangabad</li>
+              <li><input type="checkbox" /> Bangalore</li>
+              <li><input type="checkbox" /> Bellary</li>
+              <li><input type="checkbox" /> Bhandara</li>
+              <li><input type="checkbox" /> Bidar</li>
+              <li><input type="checkbox" /> Calicut</li>
+              <li><input type="checkbox" /> Chandrapur</li>
+              <li><input type="checkbox" /> Chennai</li>
+              <li><input type="checkbox" /> Chikhali</li>
+              <li><input type="checkbox" /> Cochin</li>
+              <li><input type="checkbox" /> Davangere</li>
+              <li><input type="checkbox" /> Delhi</li>
+              <li><input type="checkbox" /> Doddaballapur</li>
+              <li><input type="checkbox" /> Gulbarga</li>
+              <li><input type="checkbox" /> Guntur</li>
+              <li><input type="checkbox" /> Hadapsar, Pune</li>
+              <li><input type="checkbox" /> Hassan</li>
+              <li><input type="checkbox" /> Hinjewadi, Pune</li>
+              <li><input type="checkbox" /> Hoskote</li>
+              <li><input type="checkbox" /> Hubli</li>
+              <li><input type="checkbox" /> Hyderabad</li>
+              <li><input type="checkbox" /> Jangaon,Telangana</li>
+              <li><input type="checkbox" /> Kurha</li>
+              <li><input type="checkbox" /> Mandya</li>
+              <li><input type="checkbox" /> Mangalore</li>
+              <li><input type="checkbox" /> Mumbai</li>
+              <li><input type="checkbox" /> Mysore</li>
+              <li><input type="checkbox" /> Nagpur</li>
+              <li><input type="checkbox" /> Nashik</li>
+              <li><input type="checkbox" /> Nellore, Andhra Pradesh</li>
+              <li><input type="checkbox" /> Pimple Saudagar, Pune</li>
+              <li><input type="checkbox" /> Pune</li>
+              <li><input type="checkbox" /> Pusad, Yavatmal</li>
+              <li><input type="checkbox" /> Raigad</li>
+              <li><input type="checkbox" /> Sangli</li>
+              <li><input type="checkbox" /> Sirsi</li>
+              <li><input type="checkbox" /> Thumkur</li>
+              <li><input type="checkbox" /> Tiptur</li>
+              <li><input type="checkbox" /> Tirupati</li>
+              <li><input type="checkbox" /> Trivandrum</li>
+              <li><input type="checkbox" /> Vijayawada</li>
+              <li><input type="checkbox" /> Wardha</li>
+              <li><input type="checkbox" /> Warje, Pune</li>
+              <li><input type="checkbox" /> Yavatmal</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Department -->
+        <div class="mb-2">
+          <button class="btn w-100 text-start" data-bs-toggle="collapse" data-bs-target="#departmentDropdown" aria-expanded="false" aria-controls="departmentDropdown">
+            <strong>Department</strong>
+          </button>
+          <div class="collapse" id="departmentDropdown">
+            <ul class="list-unstyled ms-2">
+              <li><input type="checkbox" /> HR</li>
+              <li><input type="checkbox" /> IT Department</li>
+              <li><input type="checkbox" /> Marketing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 text-center">
+      <p class="text-start fw-bold fs-5">Engage - All Groups</p>
+      <div class="d-flex justify-content-end mb-3">
+        <span class="text-muted">Sort: <strong>Newest first</strong></span>
+      </div>
+
+      <div class="p-5 bg-white rounded shadow-sm">
+        <img src="https://cdn-icons-png.flaticon.com/512/456/456212.png" width="150" alt="thumbs-up" />
+        <h4 class="my-3">Get going!</h4>
+        <p>Let's give an Engage to your teammate today</p>
+        <button class="btn btn-primary mt-2">Give Engage</button>
+      </div>
+    </div>
+  </div>
+</div>

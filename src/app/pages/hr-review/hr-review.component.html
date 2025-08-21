@@ -1,0 +1,24 @@
+<div class="container py-4">
+  <h3 class="mb-4 text-primary">Employee Performance Reviews</h3>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Employee ID</th>
+          <th>Task Name</th>
+          <th>Review Date</th>
+          <th>Manager Review</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews">
+          <td>{{ review.employee.id }}</td>
+          <td>{{ review.taskName }}</td>
+          <td>{{ review.reviewDate }}</td>
+          <td>{{ review.managerReview }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

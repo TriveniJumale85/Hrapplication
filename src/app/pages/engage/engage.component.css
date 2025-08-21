@@ -1,0 +1,25 @@
+.btn-toggle {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
+
+  i.bi {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+}
+
+.btn-toggle[aria-expanded="true"] i.bi {
+  transform: rotate(90deg); 
+}

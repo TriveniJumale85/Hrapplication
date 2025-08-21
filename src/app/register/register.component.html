@@ -1,0 +1,37 @@
+<div class="container mt-4" style="max-width: 400px;">
+
+  <h3>Register</h3>
+  @if (message) {
+  <div class="alert alert-{{ alertType }}">{{ message }}</div>
+}
+
+  
+  <form (ngSubmit)="register()">
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" name="email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" name="password" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label>Role</label>
+      <select [(ngModel)]="role" name="role" class="form-select">
+        <option>USER</option>
+        <option>HR</option>
+        <option>MANAGER</option>
+        <option>SENIORHR</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Employee ID</label>
+      <input type="text" [(ngModel)]="employeeId" name="employeeId" class="form-control" required />
+    </div>
+
+    <button class="btn btn-primary">Register</button>
+  </form>
+</div>

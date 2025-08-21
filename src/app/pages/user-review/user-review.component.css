@@ -1,0 +1,13 @@
+.user-reviews {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.review-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}

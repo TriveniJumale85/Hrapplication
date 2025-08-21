@@ -1,0 +1,35 @@
+td {
+    height: 100px;
+    vertical-align: top;
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  td strong {
+    font-size: 18px;
+  }
+
+  td small {
+    color: #555;
+  }
+
+  .text-danger strong {
+    color: red;
+  }
+
+  .bg-success-subtle {
+    background-color: #e9f9ec !important;
+  }
+
+  .bg-warning-subtle {
+    background-color: #fff8e1 !important;
+  }
+
+  .bg-light-subtle {
+    background-color: #f8f9fa !important;
+  }
+
+.bg-info-subtle {
+  background-color: #e2f0fb !important; /* Weekend (O) */
+}
+

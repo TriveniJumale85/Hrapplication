@@ -1,0 +1,178 @@
+
+
+<div class="sidebar" [class.collapsed]="!isExpanded()">
+
+  <!-- Toggle Button -->
+  <button (click)="toggleSidebar()" class="toggle-btn">
+    <i class="material-icons">{{ isExpanded() ? 'chevron_left' : 'chevron_right' }}</i>
+  </button>
+
+  <!-- Sidebar Header -->
+  <div class="sidebar-header">
+    <div class="logo-container">
+     <span class="logo-text" *ngIf="isExpanded()">
+  <a routerLink="/manager-home">
+    <img src="../../../assets/OpenFuture.jpeg" alt="OpenFuture Logo" class="logo" />
+  </a>
+</span>
+
+    </div>
+  </div>
+
+  <!-- User Info -->
+  <div class="user-info" *ngIf="isExpanded()">
+    <div class="avatar">
+      <div class="">
+        <img [src]="profileImageUrl" alt="Profile Picture" class="rounded-circle border-5 shadow-sm" width="50"
+          height="50">
+      </div>
+    </div>
+    <div class="user-details">
+      <p class="user-greeting">{{fullName}}</p>
+      <p class="user-time"></p>
+    </div>
+  </div>
+
+  <div class="user-icon" *ngIf="!isExpanded()">
+    <img [src]="profileImageUrl" alt="Profile Picture" class="rounded-circle border-5 shadow-sm" width="50" height="50">
+
+    <!-- <i class="material-icons">account_circle</i> -->
+  </div>
+
+  <!-- Static Menu -->
+  <nav class="menu">
+    <ul>
+
+      <li>
+        <a class="menu-item" routerLink="/manager-home" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="material-icons">home</i>
+          <span class="menu-label" *ngIf="isExpanded()">Home</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="menu-item" routerLink="/manager-add-employee" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="material-icons">manage_accounts</i>
+          <span class="menu-label" *ngIf="isExpanded()">Manage Employee </span>
+        </a>
+      </li>
+
+      <li>
+        <a class="menu-item" routerLink="manager/engage" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="material-icons">chat</i>
+          <span class="menu-label" *ngIf="isExpanded()">Engage</span>
+        </a>
+      </li>
+      <li>
+
+
+      <li>
+        <div class="menu-item has-submenu" (click)="toggleSubmenu('Leave')">
+          <i class="material-icons">work</i>
+          <span class="menu-label" *ngIf="isExpanded()">Leave</span>
+          <i class="material-icons submenu-icon" *ngIf="isExpanded()"
+            [class.rotated]="isSubmenuExpanded('Leave')">expand_more</i>
+        </div>
+        <ul class="submenu" *ngIf="isSubmenuExpanded('Leave') && isExpanded()">
+          <li>
+            <a class="submenu-label mx-4 px-4" routerLink="manager/all-leave-request" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Manage Leave</a>
+               <li><a class="submenu-label mx-4 px-4" routerLink="manager/manager-applyleave" routerLinkActive="active">Apply Leave</a></li>
+           <li><a class="submenu-label mx-4 px-4" routerLink="manager/manager-leave-status" routerLinkActive="active">Leave Status</a></li>
+          <!-- <li>
+            <a class="submenu-label mx-4 px-4" routerLink="manager/create-holiday" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Manage Holiday</a>
+          </li> -->
+        </ul>
+      </li>
+<li>
+  <div class="menu-item has-submenu" (click)="toggleSubmenu('Salary')">
+    <i class="material-icons">payments</i>
+    <span class="menu-label" *ngIf="isExpanded()">Salary</span>
+    <i class="material-icons submenu-icon" *ngIf="isExpanded()"
+      [class.rotated]="isSubmenuExpanded('Salary')">expand_more</i>
+  </div>
+  <ul class="submenu" *ngIf="isSubmenuExpanded('Salary') && isExpanded()">
+    <li><a class="submenu-label mx-4 px-4" routerLink="manager/pay-slip" routerLinkActive="active">Pay Slip</a></li>
+
+  </ul>
+</li>
+
+
+      <!-- My Worklife -->
+      <li>
+        <div class="menu-item has-submenu" (click)="toggleSubmenu('My Worklife')">
+          <i class="material-icons">work</i>
+          <span class="menu-label" *ngIf="isExpanded()">My Worklife</span>
+          <i class="material-icons submenu-icon" *ngIf="isExpanded()"
+            [class.rotated]="isSubmenuExpanded('My Worklife')">expand_more</i>
+        </div>
+        <ul class="submenu" *ngIf="isSubmenuExpanded('My Worklife') && isExpanded()">
+          <li>
+            <a class="submenu-label mx-4 px-4" routerLink="manager/MyWorklife/kudos" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Kudos</a>
+          </li>
+          <li>
+            <a class="submenu-label mx-4 px-4" routerLink="manager/MyWorklife/feedback" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">feedback</a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- To Do -->
+      <li>
+        <div class="menu-item has-submenu" (click)="toggleSubmenu('To Do')">
+          <i class="material-icons">check_box</i>
+          <span class="menu-label" *ngIf="isExpanded()">To Do</span>
+          <i class="material-icons submenu-icon" *ngIf="isExpanded()"
+            [class.rotated]="isSubmenuExpanded('To Do')">expand_more</i>
+        </div>
+        <ul class="submenu" *ngIf="isSubmenuExpanded('To Do') && isExpanded()">
+          <li><a class="submenu-label mx-4 px-4" routerLink="manager/todo/tasks" routerLinkActive="active">Tasks</a>
+          </li>
+          <li><a class="submenu-label mx-4 px-4" routerLink="manager/todo/review" routerLinkActive="active">Review</a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Add other menu items similarly below (Salary, Leave, Attendance, etc.) -->
+
+      <li>
+        <a class="menu-item" routerLink="manager/document-centre" routerLinkActive="active">
+          <i class="material-icons">folder</i>
+          <span class="menu-label" *ngIf="isExpanded()">Documents Center</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" routerLink="manager/people" routerLinkActive="active">
+          <i class="material-icons">people</i>
+          <span class="menu-label" *ngIf="isExpanded()">People</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" routerLink="manager/helpdesk" routerLinkActive="active">
+          <i class="material-icons">help</i>
+          <span class="menu-label" *ngIf="isExpanded()">Helpdesk</span>
+        </a>
+      </li>
+
+      <!-- Workflow Delegates -->
+      <!-- <li>
+        <div class="menu-item has-submenu" (click)="toggleSubmenu('Workflow Delegates')">
+          <i class="material-icons">swap_horiz</i>
+          <span class="menu-label" *ngIf="isExpanded()">Workflow Delegates</span>
+          <i class="material-icons submenu-icon" *ngIf="isExpanded()"
+            [class.rotated]="isSubmenuExpanded('Workflow Delegates')">expand_more</i>
+        </div>
+        <ul class="submenu" *ngIf="isSubmenuExpanded('Workflow Delegates') && isExpanded()">
+          <li><a class="submenu-label mx-4 px-4 " routerLink="/workflow/delegates" routerLinkActive="active">My Delegates</a></li>
+          <li><a class="submenu-label mx-4 px-4" routerLink="/Workflow Delegates/request-hub"
+              routerLinkActive="active">request-hub</a></li>
+        </ul>
+      </li> -->
+    </ul>
+  </nav>
+</div>
