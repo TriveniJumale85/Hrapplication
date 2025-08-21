@@ -34,6 +34,7 @@ export class AddEmployeeComponent implements OnInit {
   selectedEmployeeId!: number;
   showPassword: boolean = false;
   minDate: any;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -84,7 +85,11 @@ export class AddEmployeeComponent implements OnInit {
     this.editForm = this.fb.group({
       firstName: ['', nameValidators],
       lastName: ['', nameValidators],
-      email: ['', emailValidator],
+      email: ['', [
+    Validators.required,
+    Validators.pattern(/^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/),
+    this.duplicateEmailValidator  
+  ]],
       phone: ['', [Validators.pattern(/^\d{10}$/)]],
       department: ['', textOnlyValidator],
       jobTitle: ['', textOnlyValidator],
@@ -181,6 +186,18 @@ closeAllModals() {
         emp.lastName.toLowerCase() === lastName.toLowerCase()
     );
   }
+isDuplicateEmail(email: string): boolean {
+  return this.employees.some(
+    emp => emp.email.toLowerCase() === email.toLowerCase()
+  );
+}
+
+duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null => {
+  if (!control.value) return null;
+  const email = control.value.toLowerCase();
+  const exists = this.employees.some(emp => emp.email.toLowerCase() === email);
+  return exists ? { duplicateEmail: true } : null;
+};
 
 
   onSubmit() {
@@ -193,6 +210,11 @@ closeAllModals() {
        // ✅ Duplicate check (by name)
   if (this.isDuplicateEmployee(firstName, lastName)) {
     this.toastr.error('Employee already added with this name!');
+    return;
+  }
+   // ✅ Duplicate check (by email)
+  if (this.isDuplicateEmail(email)) {
+    this.toastr.error('Employee already exists with this email!');
     return;
   }
 
