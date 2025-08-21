@@ -223,9 +223,9 @@
         </div>
 
         <div class="modal-body row g-3">
+          <!-- First Name -->
           <div class="col-md-6">
             <label>First Name</label>
-
             <input id="firstName" formControlName="firstName" class="form-control"
               [class.is-invalid]="editForm.get('firstName')?.invalid && editForm.get('firstName')?.touched" />
 
@@ -238,9 +238,9 @@
             <div class="invalid-feedback" *ngIf="editForm.get('firstName')?.errors?.['pattern']">
               Only alphabets and spaces allowed.
             </div>
-
-
           </div>
+
+          <!-- Last Name -->
           <div class="col-md-6">
             <label>Last Name</label>
             <input formControlName="lastName" class="form-control"
@@ -255,57 +255,46 @@
             <div class="invalid-feedback" *ngIf="editForm.get('lastName')?.errors?.['pattern']">
               Only alphabets and spaces allowed.
             </div>
-
           </div>
 
+          <!-- Email -->
           <div class="col-md-6">
             <label>Email</label>
             <input formControlName="email" class="form-control"
               [class.is-invalid]="editForm.get('email')?.invalid && editForm.get('email')?.touched" />
 
-            <!-- Required -->
             <div class="invalid-feedback" *ngIf="editForm.get('email')?.errors?.['required']">
               Email is required.
             </div>
-             <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['pattern']">
-              Email must start with a letter and be in valid format.
-            </div>
-
-            <!-- Invalid Pattern -->
             <div class="invalid-feedback" *ngIf="editForm.get('email')?.errors?.['pattern']">
               Please enter a valid email address.
             </div>
           </div>
 
+          <!-- Phone Number -->
           <div class="col-md-6">
             <label>Phone Number</label>
             <input formControlName="phone" class="form-control"
               [class.is-invalid]="editForm.get('phone')?.invalid && editForm.get('phone')?.touched" />
 
-            <!-- Invalid Pattern -->
             <div class="invalid-feedback" *ngIf="editForm.get('phone')?.errors?.['pattern']">
               Please enter a valid 10-digit phone number.
             </div>
-
-            <!-- Required (optional) -->
             <div class="invalid-feedback" *ngIf="editForm.get('phone')?.errors?.['required']">
               Phone number is required.
             </div>
           </div>
 
           <!-- Department -->
-
           <div class="col-md-6">
-            <label for="role">Department</label>
+            <label for="department">Department</label>
             <select class="form-select" id="department" formControlName="department"
-              [class.is-invalid]="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
+              [class.is-invalid]="editForm.get('department')?.invalid && editForm.get('department')?.touched">
               <option value="" disabled>Select department</option>
-              <option value="USER">IT</option>
+              <option value="IT">IT</option>
               <option value="HR">HR</option>
-
-              <option value="MANAGER">Admin</option>
+              <option value="Admin">Admin</option>
             </select>
-
 
             <div class="invalid-feedback" *ngIf="editForm.get('department')?.errors?.['required']">
               Department is required.
@@ -315,6 +304,7 @@
             </div>
           </div>
 
+          <!-- Job Title -->
           <div class="col-md-6">
             <label>Job Title</label>
             <input formControlName="jobTitle" class="form-control"
@@ -329,21 +319,19 @@
             <div class="invalid-feedback" *ngIf="editForm.get('jobTitle')?.errors?.['pattern']">
               Only alphabets and spaces allowed.
             </div>
-
           </div>
 
-
-
-
+          <!-- Role -->
           <div class="col-md-6">
             <label>Role</label>
             <select formControlName="role" class="form-select">
               <option value="USER">USER</option>
               <option value="HR">HR</option>
-
               <option value="MANAGER">MANAGER</option>
             </select>
           </div>
+
+          <!-- Status -->
           <div class="col-md-6">
             <label>Status</label>
             <select formControlName="status" class="form-select">
@@ -352,9 +340,15 @@
               <option value="Resigned">Resigned</option> -->
             </select>
           </div>
+
+          <!-- Joining Date -->
           <div class="col-md-6">
             <label>Joining Date</label>
-            <input type="date" formControlName="joiningDate" class="form-control" />
+            <input type="date" formControlName="joiningDate" class="form-control"
+              [class.is-invalid]="editForm.get('joiningDate')?.invalid && editForm.get('joiningDate')?.touched" />
+            <div class="invalid-feedback" *ngIf="editForm.get('joiningDate')?.errors?.['pastDate']">
+              Joining date cannot be in the past.
+            </div>
           </div>
 
         </div>
@@ -367,6 +361,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Register Employee Modal -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">

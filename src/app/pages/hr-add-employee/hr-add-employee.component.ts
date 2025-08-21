@@ -23,8 +23,29 @@ declare var bootstrap: any;
   styleUrl: './hr-add-employee.component.css'
 })
 export class HrAddEmployeeComponent implements OnInit {
-openEditModal(_t18: any) {
-throw new Error('Method not implemented.');
+openEditModal(emp: any) {
+  if (!emp) return;
+
+  this.closeAllModals(); // agar koi aur modal open ho to band kar do
+
+  this.selectedEmployeeId = emp.id;
+  this.editForm.patchValue({
+    firstName: emp.firstName || '',
+    lastName: emp.lastName || '',
+    email: emp.email || '',
+    phone: emp.phone || '',
+    department: emp.department || '',
+    jobTitle: emp.jobTitle || '',
+    role: emp.role || '',
+    status: emp.status || '',
+    joiningDate: emp.joiningDate ? emp.joiningDate.split('T')[0] : '',
+    exitDate: emp.exitDate ? emp.exitDate.split('T')[0] : ''
+  });
+
+  const modalEl = document.getElementById('editEmployeeModal');
+  if (modalEl) {
+    new bootstrap.Modal(modalEl).show();
+  }
 }
 
   employees: any[] = [];
@@ -90,7 +111,7 @@ throw new Error('Method not implemented.');
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
-      joiningDate: ['', [Validators.required, this.futureOrTodayDateValidator]],
+      joiningDate: ['', Validators.required],
       exitDate: ['']
     });
 
