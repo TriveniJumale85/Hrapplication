@@ -13,12 +13,9 @@ import { AddEmployeeService } from '../../../services/add-employee.service';
     FormsModule
   ],
   templateUrl: './user-people.component.html',
-  styleUrl: './user-people.component.css'
+  styleUrls: ['./user-people.component.css']
 })
 export class UserPeopleComponent implements OnInit {
-  openSearchMenu() {
-throw new Error('Method not implemented.');
-}
   employees: any[] = [];
   starredEmployees: any[] = [];
   defaultProfile: string = 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
@@ -34,11 +31,14 @@ throw new Error('Method not implemented.');
   }
 
   getAllEmployees() {
+    // Load starred employees from localStorage
+    const savedStarred = JSON.parse(localStorage.getItem('starredEmployees') || '[]');
+
     this.addEmployeeService.getEmployees().subscribe({
       next: (res) => {
         this.employees = res.map((emp: any) => ({
           ...emp,
-          isStarred: emp.isStarred || false
+          isStarred: savedStarred.includes(emp.id) // restore starred state
         }));
         this.starredEmployees = this.employees.filter(emp => emp.isStarred);
       },
@@ -66,30 +66,33 @@ throw new Error('Method not implemented.');
     this.selectedEmployee = emp;
   }
 
-toggleStar(emp: any) {
-  // Find employee in main list
-  const empInMain = this.employees.find(e => e.id === emp.id);
-  if (empInMain) {
-    empInMain.isStarred = !empInMain.isStarred;
-  }
-
-  // Update starred list
-  if (empInMain?.isStarred) {
-    if (!this.starredEmployees.find(e => e.id === emp.id)) {
-      this.starredEmployees.push(empInMain);
+  toggleStar(emp: any) {
+    // Find employee in main list
+    const empInMain = this.employees.find(e => e.id === emp.id);
+    if (empInMain) {
+      empInMain.isStarred = !empInMain.isStarred;
     }
-  } else {
-    this.starredEmployees = this.starredEmployees.filter(e => e.id !== emp.id);
+
+    // Update starred list
+    if (empInMain?.isStarred) {
+      if (!this.starredEmployees.find(e => e.id === emp.id)) {
+        this.starredEmployees.push(empInMain);
+      }
+    } else {
+      this.starredEmployees = this.starredEmployees.filter(e => e.id !== emp.id);
+    }
+
+    // Keep selectedEmployee in sync
+    if (this.selectedEmployee && this.selectedEmployee.id === emp.id) {
+      this.selectedEmployee.isStarred = empInMain?.isStarred || false;
+    }
+
+    // Save starred employee IDs in localStorage
+    const starredIds = this.employees.filter(e => e.isStarred).map(e => e.id);
+    localStorage.setItem('starredEmployees', JSON.stringify(starredIds));
+
+    // Force change detection
+    this.employees = [...this.employees];
+    this.starredEmployees = [...this.starredEmployees];
   }
-
-  // Keep selectedEmployee in sync
-  if (this.selectedEmployee && this.selectedEmployee.id === emp.id) {
-    this.selectedEmployee.isStarred = empInMain?.isStarred || false;
-  }
-
-  // Force change detection
-  this.employees = [...this.employees];
-  this.starredEmployees = [...this.starredEmployees];
-}
-
 }

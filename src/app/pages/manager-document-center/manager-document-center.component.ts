@@ -11,11 +11,11 @@ import { RouterModule } from '@angular/router';
 })
 export class ManagerDocumentCenterComponent {
   documents = [
-    { icon: '📄', title: 'Documents', link: '/documents' },
-    { icon: '💰', title: 'Payslips', link: '/payslips' },
+    // { icon: '📄', title: 'Documents', link: '/documents' },
+    { icon: '💰', title: 'Payslips', link: '/manager/pay-slip' },
     { icon: '🧾', title: 'Form 16', link: '/form16' },
     { icon: '📘', title: 'Company Policies', link: '/policies' },
-    { icon: '📥', title: 'Forms', link: '/forms' },
-    { icon: '✉️', title: 'Letters', link: '/letters' }
+    // { icon: '📥', title: 'Forms', link: '/forms' },
+    // { icon: '✉️', title: 'Letters', link: '/letters' }
   ];
 }
