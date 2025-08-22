@@ -198,6 +198,12 @@ duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null =>
   const exists = this.employees.some(emp => emp.email.toLowerCase() === email);
   return exists ? { duplicateEmail: true } : null;
 };
+isDuplicatePhone(phone: string): boolean {
+  return this.employees.some(
+    emp => emp.phone === phone
+  );
+}
+
 
 
   onSubmit() {
@@ -205,7 +211,7 @@ duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null =>
       this.toastr.error('Please fill all required fields correctly.');
       return;
     }
-      const { firstName, lastName, email } = this.employeeForm.value;
+      const { firstName, lastName, email, phone } = this.employeeForm.value;
 
        // ✅ Duplicate check (by name)
   if (this.isDuplicateEmployee(firstName, lastName)) {
@@ -215,6 +221,11 @@ duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null =>
    // ✅ Duplicate check (by email)
   if (this.isDuplicateEmail(email)) {
     this.toastr.error('Employee already exists with this email!');
+    return;
+  }
+   // ✅ Duplicate check (by phone)
+  if (phone && this.isDuplicatePhone(phone)) {
+    this.toastr.error('Employee already exists with this phone number!');
     return;
   }
 
@@ -275,6 +286,13 @@ duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null =>
   this.editForm.markAllAsTouched();
   return;
 }
+ const { email, phone } = this.editForm.value;
+
+  // Duplicate phone check (exclude current editing employee)
+  if (phone && this.employees.some(emp => emp.phone === phone && emp.id !== this.selectedEmployeeId)) {
+    this.toastr.error('Another employee already exists with this phone number!');
+    return;
+  }
 
 
     this.addEmployeeService.updateEmployeeWithImage(this.selectedEmployeeId, this.editForm.value).subscribe({
@@ -342,10 +360,19 @@ duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null =>
     },
     error: (err) => {
       console.error(err);
-      this.toastr.error('Failed to register employee.');
+       // ✅ जर backend ने duplicate email error दिला असेल
+    if (err.error && typeof err.error === 'string' && err.error.includes('Email already exists')) {
+      this.toastr.error('This Email ID already exists!');
     }
-  });
-}
+    else if (err.error && err.error.message && err.error.message.includes('Email already exists')) {
+      this.toastr.error('This Email ID already exists!');
+    }
+    else {
+      this.toastr.error('Failed to add employee.');
+    }
+  }
+});
+  }
 
   delete(id: number) {
     if (confirm('Are you sure you want to delete?')) {

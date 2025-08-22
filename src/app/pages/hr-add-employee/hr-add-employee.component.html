@@ -82,18 +82,20 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+         <div class="col-md-6">
             <label class="form-label">Email</label>
             <input type="email" formControlName="email" class="form-control"
               [class.is-invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched" />
-            <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['required']">
-              Email is required.
+            <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['duplicateEmail']">
+            Email already exists.
             </div>
+            <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['required']">
+  Email is required.
+</div>
             <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['pattern']">
               Email must start with a letter and be in valid format.
             </div>
-          </div>
-
+    </div>
           <!-- Phone -->
           <div class="col-md-6">
             <label for="phone">Phone</label>
