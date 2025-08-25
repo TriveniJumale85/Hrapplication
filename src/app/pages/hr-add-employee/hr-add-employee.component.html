@@ -177,6 +177,21 @@
             </div>
           </div>
 
+            <!-- Gender -->
+<div class="col-md-6">
+  <label for="gender">Gender</label>
+  <select class="form-select" id="gender" formControlName="gender"
+    [class.is-invalid]="employeeForm.get('gender')?.invalid && employeeForm.get('gender')?.touched">
+    <option value="" disabled>Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <div class="invalid-feedback" *ngIf="employeeForm.get('gender')?.errors?.['required']">
+    Gender is required.
+  </div>
+</div>
+
           <!-- Joining Date -->
           <div class="col-md-6">
             <label for="joiningDate">Joining Date</label>
@@ -342,6 +357,21 @@
               <option value="Resigned">Resigned</option> -->
             </select>
           </div>
+
+<!-- Gender -->
+<div class="col-md-6">
+  <label for="gender">Gender</label>
+  <select class="form-select" id="gender" formControlName="gender"
+    [class.is-invalid]="employeeForm.get('gender')?.invalid && employeeForm.get('gender')?.touched">
+    <option value="" disabled>Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <div class="invalid-feedback" *ngIf="employeeForm.get('gender')?.errors?.['required']">
+    Gender is required.
+  </div>
+</div>
 
           <!-- Joining Date -->
           <div class="col-md-6">

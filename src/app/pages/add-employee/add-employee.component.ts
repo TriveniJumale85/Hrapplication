@@ -78,6 +78,7 @@ export class AddEmployeeComponent implements OnInit {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
+      gender: ['', Validators.required], 
       joiningDate: [''],
       exitDate: ['']
     });
@@ -95,6 +96,7 @@ export class AddEmployeeComponent implements OnInit {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
+      gender: ['', Validators.required], 
       joiningDate: ['', [Validators.required, this.futureOrTodayDateValidator]],
       exitDate: ['']
     });

@@ -114,6 +114,7 @@ openEditModal(emp: any) {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
+       gender: ['', Validators.required], 
       joiningDate: [''],
       exitDate: ['']
     });
@@ -131,6 +132,7 @@ openEditModal(emp: any) {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
+       gender: ['', Validators.required], 
       joiningDate: ['', Validators.required],
       exitDate: ['']
     });
