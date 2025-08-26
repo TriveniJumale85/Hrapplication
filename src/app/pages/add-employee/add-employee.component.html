@@ -178,6 +178,21 @@
             </div>
           </div>
 
+<!-- Gender -->
+<div class="col-md-6">
+  <label for="gender">Gender</label>
+  <select class="form-select" id="gender" formControlName="gender"
+    [class.is-invalid]="employeeForm.get('gender')?.invalid && employeeForm.get('gender')?.touched">
+    <option value="" disabled>Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <div class="invalid-feedback" *ngIf="employeeForm.get('gender')?.errors?.['required']">
+    Gender is required.
+  </div>
+</div>
+
           <!-- Joining Date -->
           <div class="col-md-6">
             <label for="joiningDate">Joining Date</label>
@@ -193,6 +208,7 @@
               Joining date cannot be in the past.
             </div>
           </div>
+
 
 
 
@@ -352,12 +368,31 @@
               <option value="Resigned">Resigned</option> -->
             </select>
           </div>
+
+  <!-- Gender -->
+<div class="col-md-6">
+  <label>Gender</label>
+  <select formControlName="gender" class="form-select"
+    [class.is-invalid]="editForm.get('gender')?.invalid && editForm.get('gender')?.touched">
+    <option value="" disabled>Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <div class="invalid-feedback" *ngIf="editForm.get('gender')?.errors?.['required']">
+    Gender is required.
+  </div>
+</div>
+
           <div class="col-md-6">
             <label>Joining Date</label>
             <input type="date" formControlName="joiningDate" class="form-control" />
           </div>
 
         </div>
+
+
+
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Update</button>

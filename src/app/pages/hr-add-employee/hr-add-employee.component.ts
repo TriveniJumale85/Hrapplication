@@ -68,7 +68,23 @@ openEditModal(emp: any) {
   ngOnInit(): void {
     this.initForms();
     this.getEmployees();
-  }
+   
+
+
+  this.employeeForm.get('email')?.valueChanges.subscribe(email => {
+    if (email && this.isDuplicateEmail(email)) {
+      this.toastr.error('This email ID already exists!');
+      this.employeeForm.get('email')?.setErrors({ duplicateEmail: true });
+    } else {
+   
+      if (this.employeeForm.get('email')?.hasError('duplicateEmail')) {
+        this.employeeForm.get('email')?.setErrors(null);
+      }
+    }
+  });
+}
+
+  
 
   initForms() {
     const nameValidators = [
@@ -98,6 +114,7 @@ openEditModal(emp: any) {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
+       gender: ['', Validators.required], 
       joiningDate: [''],
       exitDate: ['']
     });
@@ -105,12 +122,17 @@ openEditModal(emp: any) {
     this.editForm = this.fb.group({
       firstName: ['', nameValidators],
       lastName: ['', nameValidators],
-      email: ['', emailValidator],
+      email: ['', [
+    Validators.required,
+    Validators.pattern(/^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/),
+    this.duplicateEmailValidator  
+  ]],
       phone: ['', [Validators.pattern(/^\d{10}$/)]],
       department: ['', textOnlyValidator],
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
+       gender: ['', Validators.required], 
       joiningDate: ['', Validators.required],
       exitDate: ['']
     });
@@ -202,6 +224,25 @@ isDuplicateEmployee(firstName: string, lastName: string): boolean {
       emp.lastName.toLowerCase() === lastName.toLowerCase()
   );
 }
+isDuplicateEmail(email: string): boolean {
+  return this.employees.some(
+    emp => emp.email.toLowerCase() === email.toLowerCase()
+  );
+}
+
+duplicateEmailValidator = (control: AbstractControl): ValidationErrors | null => {
+  if (!control.value) return null;
+  const email = control.value.toLowerCase();
+  const exists = this.employees.some(emp => emp.email.toLowerCase() === email);
+  return exists ? { duplicateEmail: true } : null;
+};
+isDuplicatePhone(phone: string): boolean {
+  return this.employees.some(
+    emp => emp.phone === phone
+  );
+}
+
+
 
 
 
@@ -210,22 +251,32 @@ isDuplicateEmployee(firstName: string, lastName: string): boolean {
       this.toastr.error('Please fill all required fields correctly.');
       return;
     }
-      const { firstName, lastName, email } = this.employeeForm.value;
+      const { firstName, lastName, email,phone } = this.employeeForm.value;
 
   if (this.isDuplicateEmployee(firstName, lastName)) {
     this.toastr.error('Employee already added with this name!');
     return;
   }
 
-
-  // ✅ Email lowercase check
-  if (email !== email.toLowerCase()) {
-    this.toastr.error('Email must be in small letters only.');
+     // ✅ Duplicate check (by email)
+  if (this.isDuplicateEmail(email)) {
+    this.toastr.error('Employee already exists with this email!');
     return;
   }
-    // ✅ Extra check: Email must be lowercase
-  const emailValue = this.employeeForm.get('email')?.value;
-  if (emailValue !== emailValue.toLowerCase()) {
+  // ✅ Duplicate Email Check (STOP API CALL HERE)
+  if (this.isDuplicateEmail(email)) {
+    this.toastr.error('This Email ID already exists!');
+    this.employeeForm.get('email')?.setErrors({ duplicateEmail: true });
+    return;
+  }
+  // ✅ Duplicate check (by phone)
+  if (phone && this.isDuplicatePhone(phone)) {
+    this.toastr.error('Employee already exists with this phone number!');
+    return;
+  }
+
+  // ✅ Extra lowercase check
+  if (email !== email.toLowerCase()) {
     this.toastr.error('Email must be in small letters only.');
     return;
   }
@@ -238,6 +289,7 @@ isDuplicateEmployee(firstName: string, lastName: string): boolean {
 
     this.addEmployeeService.addEmployeeWithImage(formData).subscribe({
       next: () => {
+          this.toastr.success('Employee added successfully!');
         this.closeAllModals();
         this.toastr.success('Employee added successfully!');
         this.employeeForm.reset();
@@ -246,9 +298,18 @@ isDuplicateEmployee(firstName: string, lastName: string): boolean {
       },
       error: (err) => {
         console.error(err);
-        this.toastr.error('Failed to add employee.');
-      }
-    });
+          // ✅ जर backend ने duplicate email error दिला असेल
+    if (err.error && typeof err.error === 'string' && err.error.includes('Email already exists')) {
+      this.toastr.error('This Email ID already exists!');
+    }
+    else if (err.error && err.error.message && err.error.message.includes('Email already exists')) {
+      this.toastr.error('This Email ID already exists!');
+    }
+    else {
+      this.toastr.error('Failed to add employee.');
+    }
+  }
+});
   }
 
   onEditSubmit() {
@@ -267,6 +328,13 @@ const { firstName, lastName } = this.editForm.value;
 
   if (duplicate) {
     this.toastr.error('Another employee with the same name already exists!');
+    return;
+  }
+   const { email, phone } = this.editForm.value;
+
+  // Duplicate phone check (exclude current editing employee)
+  if (phone && this.employees.some(emp => emp.phone === phone && emp.id !== this.selectedEmployeeId)) {
+    this.toastr.error('Another employee already exists with this phone number!');
     return;
   }
 
