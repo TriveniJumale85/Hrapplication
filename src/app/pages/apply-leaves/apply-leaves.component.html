@@ -29,7 +29,7 @@
 
         <!-- Applying To -->
         <div class="col-md-6">
-          <label class="form-label fw-semibold">Manager Email</label>
+          <label class="form-label fw-semibold">To</label>
           <input type="email" class="form-control" formControlName="applyingTo"
             placeholder="e.g. manager@company.com" />
           <div class="text-danger" *ngIf="leaveForm.get('applyingTo')?.touched && leaveForm.get('applyingTo')?.invalid">
@@ -47,7 +47,7 @@
 
         <!-- CC To -->
         <div class="col-md-6">
-          <label class="form-label fw-semibold">CC To</label>
+          <label class="form-label fw-semibold">CC </label>
           <ng-select [items]="emailList" bindLabel="email" [multiple]="true" placeholder="Select emails"
             formControlName="ccTo">
           </ng-select>

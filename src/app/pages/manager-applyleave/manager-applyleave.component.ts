@@ -16,7 +16,7 @@ import { ApplyLeavesService } from '../../../services/apply-leaves.service';
 export class ManagerApplyleaveComponent {
   leaveForm: FormGroup;
   selectedFile: File | null = null;
-  leaveTypes = ['SICK', 'CASUAL', 'PAID', 'UNPAID', 'MATERNITY'];
+  leaveTypes = ['SICK', 'CASUAL', 'PAID', 'UNPAID', ];
   today = new Date().toISOString().split('T')[0]; 
   emailList: any[] = [];
   employeeId = JSON.parse(localStorage.getItem('userData') || '{}').EmployeeId || '';

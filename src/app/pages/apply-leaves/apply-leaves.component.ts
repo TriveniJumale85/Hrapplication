@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class ApplyLeavesComponent {
   leaveForm: FormGroup;
   selectedFile: File | null = null;
-  leaveTypes = ['SICK', 'CASUAL', 'PAID', 'UNPAID', 'MATERNITY'];
+  leaveTypes = ['SICK', 'CASUAL', 'PAID', 'UNPAID', ];
   today = new Date().toISOString().split('T')[0]; 
   emailList: any[] = [];
   employeeId = JSON.parse(localStorage.getItem('userData') || '{}').EmployeeId || '';

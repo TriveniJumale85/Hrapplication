@@ -1,6 +1,3 @@
-
-
-
 <div class="container mt-5">
   <div class="card shadow-lg">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -16,7 +13,7 @@
             <th>📆 Month</th>
             <th>👤 Uploaded By</th>
             <th>🕒 Upload Date</th>
-            <th>⬇️ Download</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody *ngIf="salaryRecords.length > 0; else noData">
@@ -27,7 +24,16 @@
             <td>{{ record.uploadedBy }}</td>
             <td>{{ record.uploadDate | date: 'short' }}</td>
             <td>
-              <button class="btn btn-outline-primary btn-sm" (click)="downloadFile(record.id, record.fileName)">
+              <!-- Preview Button -->
+              <button class="btn btn-outline-success btn-sm me-1" 
+                      (click)="previewFile(record.id)">
+                <span class="material-icons">visibility</span>
+              </button>
+
+              <!-- Download Button (Disabled until previewed) -->
+              <button class="btn btn-outline-primary btn-sm"
+                      [disabled]="!previewedBlobUrl"
+                      (click)="downloadFile(record.fileName)">
                 <span class="material-icons">download</span>
               </button>
             </td>
@@ -38,6 +44,27 @@
       <ng-template #noData>
         <p class="text-center mt-4 text-muted">No records found.</p>
       </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Document Preview</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe *ngIf="previewUrl" 
+                [src]="previewUrl"
+                type="application/pdf"
+                width="100%" 
+                height="600px" 
+                style="border:none;">
+        </iframe>
+      </div>
     </div>
   </div>
 </div>
