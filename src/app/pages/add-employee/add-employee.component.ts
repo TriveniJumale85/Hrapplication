@@ -34,7 +34,7 @@ export class AddEmployeeComponent implements OnInit {
   selectedEmployeeId!: number;
   showPassword: boolean = false;
   minDate: any;
-  
+
 
   constructor(
     private fb: FormBuilder,
@@ -54,13 +54,11 @@ export class AddEmployeeComponent implements OnInit {
       Validators.pattern(/^[A-Za-z\s]+$/)
     ];
 
-   
+
       const emailValidator = [
   Validators.required,
   Validators.pattern(/^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/)
 ];
-
-
 
     const textOnlyValidator = [
       Validators.required,
@@ -78,7 +76,7 @@ export class AddEmployeeComponent implements OnInit {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
-      gender: ['', Validators.required], 
+      gender: ['', Validators.required],
       joiningDate: [''],
       exitDate: ['']
     });
@@ -89,14 +87,13 @@ export class AddEmployeeComponent implements OnInit {
       email: ['', [
     Validators.required,
     Validators.pattern(/^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/),
-    this.duplicateEmailValidator  
   ]],
-      phone: ['', [Validators.pattern(/^\d{10}$/)]],
+      phone: ['', [Validators.required,Validators.pattern(/^\d{10}$/)]],
       department: ['', textOnlyValidator],
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
-      gender: ['', Validators.required], 
+      gender: ['', Validators.required],
       joiningDate: ['', [Validators.required, this.futureOrTodayDateValidator]],
       exitDate: ['']
     });
@@ -335,7 +332,7 @@ isDuplicatePhone(phone: string): boolean {
     this.toastr.error('Please enter password to register.');
     return;
   }
- 
+
   const registerFormValue = this.registerForm.value;
   const userData = {
     email: registerFormValue.email,   // readonly
@@ -345,14 +342,14 @@ isDuplicatePhone(phone: string): boolean {
     password: registerFormValue.password,   // only editable field
     employee: { id: this.selectedEmployeeId }
   };
- 
+
   const formData = new FormData();
   formData.append('userData', JSON.stringify(userData));
- 
+
   if (this.selectedImage) {
     formData.append('profilePicture', this.selectedImage);
   }
- 
+
   this.addEmployeeService.registerEmployee(formData).subscribe({
     next: () => {
       this.closeAllModals();

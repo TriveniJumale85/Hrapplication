@@ -3,16 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ForgotPasswordService } from '../../../services/forgot-password.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
 })
 export class ForgotPasswordComponent {
   email = '';
@@ -22,12 +20,13 @@ export class ForgotPasswordComponent {
   step = 1;
 
   passwordStrength = 0;
-alertType: any;
-alertMessage: any;
+  alertType: any;
+  alertMessage: any;
 
   constructor(
     private forgotPasswordService: ForgotPasswordService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   sendOtp(): void {
@@ -42,16 +41,16 @@ alertMessage: any;
       },
       error: (err: any) => {
         this.toastr.error(err?.error || 'Failed to send OTP');
-      }
+      },
     });
   }
   showAlert(message: string, type: 'success' | 'error') {
-  this.alertMessage = message;
-  this.alertType = type;
-  setTimeout(() => {
-    this.alertMessage = '';
-  }, 5000);
-}
+    this.alertMessage = message;
+    this.alertType = type;
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 5000);
+  }
 
   resetPassword(): void {
     if (this.password !== this.confirmPassword) {
@@ -68,11 +67,12 @@ alertMessage: any;
         next: (res: any) => {
           this.toastr.success(res || 'Password reset successful');
           this.step = 1;
+          this.router.navigate(['/login']);
           this.clearFields();
         },
         error: (err: any) => {
           this.toastr.error(err?.error || 'Failed to reset password');
-        }
+        },
       });
   }
 
