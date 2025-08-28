@@ -87,6 +87,7 @@ export class AddEmployeeComponent implements OnInit {
       email: ['', [
     Validators.required,
     Validators.pattern(/^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/),
+
   ]],
       phone: ['', [Validators.required,Validators.pattern(/^\d{10}$/)]],
       department: ['', textOnlyValidator],
