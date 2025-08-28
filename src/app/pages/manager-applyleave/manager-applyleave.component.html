@@ -27,16 +27,21 @@
 </div>
  
 
-        <!-- Applying To -->
-        <div class="col-md-6">
-          <label class="form-label fw-semibold">To</label>
-          <input type="email" class="form-control" formControlName="applyingTo"
-            placeholder="e.g. manager@company.com" />
-          <div class="text-danger" *ngIf="leaveForm.get('applyingTo')?.touched && leaveForm.get('applyingTo')?.invalid">
-            <div *ngIf="leaveForm.get('applyingTo')?.errors?.['required']">Manager Email is required.</div>
-            <div *ngIf="leaveForm.get('applyingTo')?.errors?.['email']">Invalid email format.</div>
-          </div>
-        </div>
+       <!-- Applying To -->
+<div class="col-md-6">
+  <label class="form-label fw-semibold">To</label>
+  <ng-select
+    [items]="emailList"
+    bindLabel="email"
+    bindValue="email"
+    placeholder="Select Manager"
+    formControlName="applyingTo">
+  </ng-select>
+  <div class="text-danger" *ngIf="leaveForm.get('applyingTo')?.touched && leaveForm.get('applyingTo')?.invalid">
+    <div *ngIf="leaveForm.get('applyingTo')?.errors?.['required']">Manager Email is required.</div>
+    <div *ngIf="leaveForm.get('applyingTo')?.errors?.['email']">Invalid email format.</div>
+  </div>
+</div>
 
         <!-- CC To -->
         <!-- <div class="col-md-6">
