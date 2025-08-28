@@ -68,7 +68,7 @@ openEditModal(emp: any) {
   ngOnInit(): void {
     this.initForms();
     this.getEmployees();
-   
+
 
 
   this.employeeForm.get('email')?.valueChanges.subscribe(email => {
@@ -76,7 +76,7 @@ openEditModal(emp: any) {
       this.toastr.error('This email ID already exists!');
       this.employeeForm.get('email')?.setErrors({ duplicateEmail: true });
     } else {
-   
+
       if (this.employeeForm.get('email')?.hasError('duplicateEmail')) {
         this.employeeForm.get('email')?.setErrors(null);
       }
@@ -84,7 +84,7 @@ openEditModal(emp: any) {
   });
 }
 
-  
+
 
   initForms() {
     const nameValidators = [
@@ -114,7 +114,7 @@ openEditModal(emp: any) {
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
-       gender: ['', Validators.required], 
+       gender: ['', Validators.required],
       joiningDate: [''],
       exitDate: ['']
     });
@@ -125,14 +125,14 @@ openEditModal(emp: any) {
       email: ['', [
     Validators.required,
     Validators.pattern(/^[a-z][a-z0-9._%+-]*@[a-z0-9.-]+\.[a-z]{2,}$/),
-    // this.duplicateEmailValidator  
+    // this.duplicateEmailValidator
   ]],
-      phone: ['', [Validators.pattern(/^\d{10}$/)]],
+      phone: ['', [Validators.required,Validators.pattern(/^\d{10}$/)]],
       department: ['', textOnlyValidator],
       jobTitle: ['', textOnlyValidator],
       role: ['', Validators.required],
       status: ['', Validators.required],
-       gender: ['', Validators.required], 
+       gender: ['', Validators.required],
       joiningDate: ['', Validators.required],
       exitDate: ['']
     });
@@ -376,7 +376,7 @@ const { firstName, lastName } = this.editForm.value;
     this.toastr.error('Please enter password to register.');
     return;
   }
- 
+
   const registerFormValue = this.registerForm.value;
   const userData = {
     email: registerFormValue.email,   // readonly
@@ -386,14 +386,14 @@ const { firstName, lastName } = this.editForm.value;
     password: registerFormValue.password,   // only editable field
     employee: { id: this.selectedEmployeeId }
   };
- 
+
   const formData = new FormData();
   formData.append('userData', JSON.stringify(userData));
- 
+
   if (this.selectedImage) {
     formData.append('profilePicture', this.selectedImage);
   }
- 
+
   this.addEmployeeService.registerEmployee(formData).subscribe({
     next: () => {
       this.closeAllModals();
