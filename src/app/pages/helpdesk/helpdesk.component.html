@@ -13,32 +13,23 @@
 <div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-
       <!-- Modal Header -->
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="ticketModalLabel">Create New Ticket</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <!-- Modal Body (Your Form) -->
+      <!-- Modal Body -->
       <div class="modal-body">
-        <!-- Yahan tumhara pura ticket form paste hoga -->
-        <!-- <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" novalidate>
-        </form> -->
-
         <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" novalidate>
           <div class="card mb-4">
-
             <div class="card-body">
               <div class="row g-3">
-                <!-- Category Field -->
+                <!-- Category -->
                 <div class="col-md-6">
                   <label for="categorySelect" class="form-label">Select Category</label>
                   <select class="form-select" id="categorySelect" name="category" formControlName="category"
-                    [class.is-invalid]="
-                ticketForm.get('category')?.invalid &&
-                ticketForm.get('category')?.touched
-              ">
+                    [class.is-invalid]="ticketForm.get('category')?.invalid && ticketForm.get('category')?.touched">
                     <option selected disabled>Choose a category</option>
                     <option value="employee">Employee Information</option>
                     <option value="tax">Income Tax</option>
@@ -46,85 +37,47 @@
                     <option value="payslip">Payslip</option>
                     <option value="other">Other</option>
                   </select>
-
-
-
-                  <div *ngIf="
-                ticketForm.get('category')?.invalid &&
-                ticketForm.get('category')?.touched
-              " class="invalid-feedback">
+                  <div *ngIf="ticketForm.get('category')?.invalid && ticketForm.get('category')?.touched"
+                    class="invalid-feedback">
                     <span *ngIf="ticketForm.get('category')?.errors?.['required']">Category is required</span>
-                    <span *ngIf="ticketForm.get('category')?.errors?.['maxlength']">Max length is 50 characters</span>
                   </div>
                 </div>
 
-                <!-- Subject Field -->
+                <!-- Subject -->
                 <div class="col-md-6">
                   <label for="subject" class="form-label">Subject</label>
-                  <input type="text" class="form-control" id="subject" formControlName="subject" [class.is-invalid]="
-                ticketForm.get('subject')?.invalid &&
-                ticketForm.get('subject')?.touched
-              " />
-                  <div *ngIf="
-                ticketForm.get('subject')?.invalid &&
-                ticketForm.get('subject')?.touched
-              " class="invalid-feedback">
+                  <input type="text" class="form-control" id="subject" formControlName="subject"
+                    [class.is-invalid]="ticketForm.get('subject')?.invalid && ticketForm.get('subject')?.touched" />
+                  <div *ngIf="ticketForm.get('subject')?.invalid && ticketForm.get('subject')?.touched"
+                    class="invalid-feedback">
                     <span *ngIf="ticketForm.get('subject')?.errors?.['required']">Subject is required</span>
-                    <span *ngIf="ticketForm.get('subject')?.errors?.['maxlength']">Max length is 100 characters</span>
                   </div>
                 </div>
 
-                <!-- Description Field -->
+                <!-- Description -->
                 <div class="col-12">
                   <label for="description" class="form-label">Description</label>
                   <textarea class="form-control" id="description" rows="3" formControlName="description"
-                    [class.is-invalid]="
-                ticketForm.get('description')?.invalid &&
-                ticketForm.get('description')?.touched
-              "></textarea>
-                  <div *ngIf="
-                ticketForm.get('description')?.invalid &&
-                ticketForm.get('description')?.touched
-              " class="invalid-feedback">
+                    [class.is-invalid]="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched"></textarea>
+                  <div *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched"
+                    class="invalid-feedback">
                     <span *ngIf="ticketForm.get('description')?.errors?.['required']">Description is required</span>
-                    <span *ngIf="ticketForm.get('description')?.errors?.['maxlength']">Max length is 2000
-                      characters</span>
                   </div>
                 </div>
 
-                <!-- CC To Field -->
-                <div class="col-md-6">
-                  <label for="ccTo" class="form-label">CC To (comma separated emails)</label>
-                  <input type="text" class="form-control" id="ccTo" formControlName="ccTo" />
-                </div>
-
-                <!-- Priority Field -->
+                <!-- Priority -->
                 <div class="col-md-6">
                   <label for="priority" class="form-label">Priority</label>
-                  <select class="form-select" id="priority" formControlName="priority" [class.is-invalid]="
-                ticketForm.get('priority')?.invalid &&
-                ticketForm.get('priority')?.touched
-              ">
-                    <option *ngFor="let priority of priorities" [value]="priority">
-                      {{ priority }}
-                    </option>
+                  <select class="form-select" id="priority" formControlName="priority"
+                    [class.is-invalid]="ticketForm.get('priority')?.invalid && ticketForm.get('priority')?.touched">
+                    <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
                   </select>
-                  <div *ngIf="
-                ticketForm.get('priority')?.invalid &&
-                ticketForm.get('priority')?.touched
-              " class="invalid-feedback">
-                    Please select a priority
-                  </div>
                 </div>
 
                 <!-- File Upload -->
                 <div class="col-12">
                   <label for="file" class="form-label">Attachment</label>
-                  <input type="file" class="form-control" id="file" (change)="onFileSelected($event)"
-                    [class.is-invalid]="
-                ticketForm.get('file')?.invalid &&
-                ticketForm.get('file')?.touched
-              " />
+                  <input type="file" class="form-control" id="file" (change)="onFileSelected($event)" />
                   <small class="text-muted">Max file size: 10MB</small>
                 </div>
 
@@ -137,7 +90,7 @@
                   </div>
                 </div>
 
-                <!-- Submit Button -->
+                <!-- Submit -->
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary" [disabled]="isLoading">
                     <span *ngIf="!isLoading">Submit Ticket</span>
@@ -153,10 +106,7 @@
   </div>
 </div>
 
-<!-- //! table of tikets in boostrap -->
-
-
-<!-- make the table -->
+<!-- Tickets Table -->
 <div *ngIf="tickets" class="">
   <h4 class="text-center text-white ">Applied Tickets</h4>
   <table class="table table-bordered table-striped">
